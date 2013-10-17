@@ -43,8 +43,11 @@
 				</row>
 				<row>
 					<combobox id = "category" width="300px" mold="rounded">
-						<comboitem label="Science"/>
+						<comboitem label="Engineering"/>
 						<comboitem label="Math"/>
+						<comboitem label="Social Sciences"/>
+						<comboitem label="Medicine"/>
+						<comboitem label="Language"/>
 					</combobox>
 				</row>
 				<row>

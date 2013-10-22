@@ -305,7 +305,7 @@ public class DBManager {
 		String query;
 		ResultSet rs;
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "select Paper_ID from Papers where contains(Title, ?) and contains(Description, ?);";
+    	query = "select Paper_ID from Papers where contains(Title, ?) or contains(Description, ?);";
     	try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
 			stmt.setString(1, keyword);

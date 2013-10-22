@@ -299,6 +299,34 @@ public class DBManager {
 		}
 	}
 	
+	public int[] KeywordSearch(String keyword)
+	{ // retrieves up to 100 Paper_ID's in an array
+		int[] paperIDs = new int[100];
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Paper_ID from Papers where contains(Title, ?) and contains(Description, ?);";
+    	try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, keyword);
+			stmt.setString(2, keyword);
+			rs = stmt.executeQuery();
+			int i = 0;
+			while (rs.next() || (i > 100)) {
+				paperIDs[i] = rs.getInt(1);
+				i++;
+			}
+			rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return paperIDs;
+		} 
+		catch (SQLException e) {
+			System.out.println("Failure to search Papers: " + e.getMessage());
+			return null;
+		}
+	}
+	
 	public String GetPaperPath(int id)
 	{
 		String path;
@@ -1000,4 +1028,5 @@ public class DBManager {
 		}
 		return null;
 	}
+	
 }

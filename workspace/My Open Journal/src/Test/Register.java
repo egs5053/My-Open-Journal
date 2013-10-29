@@ -35,16 +35,25 @@ public class Register extends SelectorComposer<Component> {
 		String pass = SessionManager.saltAndHash(pwd.getText());
 		Date date = new Date();
     	DBManager manager = new DBManager();
-    	// Insert User into database
-    	manager.InsertUser(username.getText(), first.getText(), last.getText(), pass, email.getText(), "0", dateFormat.format(date)); 
-		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
-			public void onEvent(ClickEvent event)
-			{
-				Executions.sendRedirect("index.zul");
-			}
-		};
-		Messagebox.show(username.getText() + " has successfully registered!!", "", new Messagebox.Button[]{
-	        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    	// Query Database for user, if it doesn't exist, insert user,
+    	//	otherwise, prompt for a new username
+    	boolean doesExist = manager.isValidUser(username.getText());
+    	if (doesExist) {
+    		// Prompt for different username
+    		Messagebox.show(username.getText() + " already exists! Please choose different username", "", new Messagebox.Button[]{
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    	} else {	
+	    	// Insert User into database
+	    	manager.InsertUser(username.getText(), first.getText(), last.getText(), pass, email.getText(), "0", dateFormat.format(date)); 
+			EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+				public void onEvent(ClickEvent event)
+				{
+					Executions.sendRedirect("index.zul");
+				}
+			};
+			Messagebox.show(username.getText() + " has successfully registered!!", "", new Messagebox.Button[]{
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    	}
     }
 	
 }

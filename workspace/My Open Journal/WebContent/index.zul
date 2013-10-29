@@ -3,7 +3,7 @@
 <zk>
 <?init class="Test.SessionManager"?>
 
-<grid id = "allHomeCols" apply="Test.Home">
+<grid id = "allHomeCols" apply="Test.Home" style="margin-top: -20px;">
 	<columns>
 		<column>
 			<label value = "MOST POPULAR" style = "color: black; font-weight:bold; font-size:14px"/>
@@ -36,5 +36,7 @@
 		</column>
 	</columns>
 </grid>
+<div class="spacer">
+</div>
 
 </zk>

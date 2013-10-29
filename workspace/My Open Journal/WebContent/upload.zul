@@ -2,59 +2,58 @@
 <zk>
 <?init class="Test.SessionManager"?>
 	<window width="722px" apply="Test.Upload">	
-		<grid oddRowSclass="none">
+		<grid oddRowSclass="none" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
 			<rows>
-				<row>
+				<row zclass="none">
 					<label value = "Submit Paper" style="color:black; font-weight:bold; font-size:20px"/>
 				</row>
 				<row>
-					<label value="Title" style="color:black; font-weight:bold; font-size:16px"/>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "Title" sclass="boxLabel"/>
 				</row>
 				<row height = "30px">
-					<textbox id = "title" width="300px" constraint="no empty" mold="rounded"/>		 
+					<textbox id = "title" width="300px" constraint="no empty"/>		 
 					<hbox align="center">
 						<button id="uploadPaper" upload="true" style="font-weight:bold; font-size:14px" width="160px" label="Upload File" mold="trendy"/>					
 						<label value="(*.pdf only)"/>
 				 	</hbox>
 				</row>
-				<row>
-					<label value="Co-Authors" style="color:black; font-weight:bold; font-size:16px"/>
-					<textbox id = "filePath" width = "300px" mold="rounded"/>	
+				<row zclass="none">
+					<label value="Co-Authors" sclass="boxLabel"/>
+					<textbox id = "filePath" width = "300px"/>	
 				</row>
 				<row>
-					<textbox id = "coauthors" width="300px" mold="rounded"/>
-					<hbox align = "center">
-						<label value = "Description" style = "color:black; font-weight:bold; font-size:16px"/>
-					</hbox>
+					<textbox id = "coauthors" width="300px"/>
+					<label value = "Description" sclass="boxLabel"/>
 				</row>
-				<row>
-					<label value="References"
-						style="color:black; font-weight:bold; font-size:16px"/>
+				<row zclass="none">
+					<label value="References" sclass="boxLabel"/>
 					<cell rowspan = "6">
-					<textbox id = "description" width = "300px" mold = "rounded" constraint="no empty" rows = "13"/>
+					<textbox id = "description" width = "300px" constraint="no empty" rows = "13"/>
 					</cell>
 				</row>
 				<row>
-					<textbox width="300px" mold="rounded"/>
-
+					<textbox width="300px"/>
 				</row>
-				<row height = "30px">
-					<label value="Category" style="color:black; font-weight:bold; font-size:16px"/>
+				<row zclass="none">
+					<label value="Category" sclass="boxLabel"/>
 				</row>
 				<row>
-					<combobox id = "category" width="300px" mold="rounded">
+					<combobox id = "category" width="300px">
 						<comboitem label="Science"/>
 						<comboitem label="Math"/>
 					</combobox>
 				</row>
-				<row>
-					<hbox align = "center" height = "20px">
-						<label value="Tags" style="color:black; font-weight:bold; font-size:16px"/>
-						<label value="(Seperated by a comma)" style="font-size:12px"/>
+				<row zclass="none">
+					<hbox>
+						<label value="Tags" sclass="boxLabel"/>
+						<label value="(Seperated by a comma)" style="font-size:10px"/>
 					</hbox>
 				</row>
 				<row>
-					<textbox id = "tags" width="300px" mold="rounded"/>
+					<textbox id = "tags" width="300px"/>
 				</row>
 				<row>
 					<cell colspan = "2">

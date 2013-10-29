@@ -1,9 +1,9 @@
 <?page title="My Open Journal - Contact Us" contentType="text/html;charset=UTF-12"?>
 <zk>
 <?init class="Test.SessionManager"?>
-		<grid oddRowSclass="false">
+		<grid oddRowSclass="false" style="border: none; margin-left: 20px" sclass="tblWithoutHover">
 			<rows>
-				<row>
+				<row zclass="none">
 					<label value="Contact Us"
 						style="color:black; font-weight:bold; font-size:20px;">
 					</label>

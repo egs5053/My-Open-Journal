@@ -1,5 +1,18 @@
 /* CSS Document for MyOpenJournal */
-/* Last revision: John Larimer 3-20-13 initial development */
+/* Last revision: Ian Shields 10-26-2013 for UI improvements */
+
+html, body{
+	margin: 0px;
+	padding: 0px;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+}  
+
+a:hover {
+	color:#FFFFFF;
+}
 
 .header {
 	font-size: 42px;
@@ -18,6 +31,43 @@
 	height: auto;
 	background-color: #000000;
 	color: #ADA3A7;
-	font-size: 28px;
+	font-size: 15px;
 	font-style: bold;
+}
+
+.tblWithoutHover tr.z-row-over > td.z-row-inner, tr.z-row-over > .z-cell {
+	border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    background-image: none;
+}
+
+.tblWithoutHover > tr.z-row-over > td.z-row-inner {
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.boxLabel{
+	color:black; 
+	font-weight:bold; 
+	font-size:12px; 
+	padding-left: 7px
+}
+
+.spacer{
+	height: 20px;
+	width: 100%;
+	background: #ffffff;	
+	-moz-box-shadow:    inset 0px 20px 20px -20px;
+	-webkit-box-shadow: inset 0px 20px 20px -20px;
+	box-shadow:         inset 0px 20px 20px -20px;
+}
+
+.links{
+	padding-top: 80px; 
+	padding-left: 4px; 
+	box-sizing: border-box; 
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	float: left; 
+	width: auto;
 }

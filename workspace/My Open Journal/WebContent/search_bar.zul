@@ -1,18 +1,12 @@
 <zk>
-	<window id="search_bar" title="Search" width="200px" border="normal"
-    <!-- apply="" -->>
-		<grid oddRowSclass="none">
-			<rows>
-				<row>
-					<label value = "Search" style="color:black; font-weight:bold; font-size:20px"/>
-				</row>
-				<row height = "20px">
-					<textbox id = "searchbox" width="100px" mold="rounded"/>		 
-					<hbox align="center">
-						<button id="search" style="font-weight:bold; font-size:12px" width="90px" label="Search" mold="trendy"/>
-				 	</hbox>
-				</row>
-			</rows>
-		</grid>
+	<window id="search_bar" title="Search" width="240px" border="normal">
+    <!-- //apply="Test.search_results" -->
+    <hbox align="center">
+        <textbox id="keywordBox" />
+        <button id="searchButton" label="Search" />
+    </hbox>
+    <hlayout sclass="search" style="text-align: left;">
+		<a href="advanced_search.zul" sclass="navbar">Advanced Search</a>
+	</hlayout>
 	</window>
 </zk>

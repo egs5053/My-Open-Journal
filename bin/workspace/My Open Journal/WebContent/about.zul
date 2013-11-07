@@ -1,0 +1,18 @@
+<?page title="MyOpenJournal - About Us" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window>
+	<grid oddRowSclass = "false">
+		<rows>
+			<row>
+				<label value = "About Us" style = "font-size:20px; font-weight:bold; color:black"/>
+			</row>
+			<row>
+				<label value = "MyOpenJournal is a scientific social networking site that aims to enable rapid scientific communication, accounting, collaboration, and discovery."  style = "font-size:14px; font-weight:bold; color:black"/>
+			</row>
+			<row>
+				<label value = "MyOpenJournal was designed and created by team FOXHOUND, which consists of Jeremy Crafts, Chris Crawford, Eric Dundore, Mike Green, John Larimer, Tyler Purdom and Dan Sassi.  The ZK framework was used to design the GUI of the site, with Java logic and a SQL database running behind the scenes on an Apache Tomcat server." style = "font-size:14px; color:black"/>
+			</row>
+		</rows>
+	</grid>
+</window>
+</zk>

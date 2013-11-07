@@ -1,0 +1,42 @@
+<?page title="My Open Journal - Login" contentType="text/html;charset=UTF-12"?>
+
+<zk>
+<?init class="Test.SessionManager"?>
+	<window  apply="Test.Login" >
+		<grid oddRowSclass = "false" style="border: none; margin-left: 20px" sclass="tblWithoutHover">	    
+		    <rows>
+		    	<row zclass="none">
+					<label value = "Login" style="color:black; font-weight:bold; font-size:20px"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "Username:" sclass="boxLabel"/>
+				</row>
+		        <row>
+					<hbox align = "center">
+						<textbox id="username" style = "width:140px; font-size:16px" mold = "rounded"/>
+					</hbox>
+		        </row>
+		        <row zclass="none">
+					<label value = "Password:" sclass="boxLabel"/>
+				</row>
+		        <row>
+		       		<hbox align = "center">
+		       			<textbox id="pwd" type="password" style = "width:140px; font-size: 16px" mold = "rounded"/>
+		       		</hbox>
+		        </row>
+		        <row>
+		        	<button id="login" label="Log In" style = "color:black; font-size:14px; font-weight:bold"/>
+		        </row>
+		        <row>
+		        	<hbox align = "center">
+		        		<label value="Not a member? Sign up here: " style = "font-size:14px" />
+		       			<button id="register" label="Register" style = "font-size:14px; font-weight:bold"/>
+		       		</hbox>
+		        </row>
+		    </rows>
+		</grid>
+	</window>
+</zk>

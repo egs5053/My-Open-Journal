@@ -1,0 +1,56 @@
+<?page title="MyOpenJournal - View Paper" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+	<window width = "722px">
+		<grid oddRowSclass="none" apply="Test.Paper">
+			<rows>
+				<row>
+					<cell colspan = "12">
+						<hbox width ="100%" height = "20px">
+							<label id = "paperTitle" style="font-weight:bold; font-size:20px"/>
+						</hbox>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "12">
+						<label id = "byAuthor" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row><label/></row>
+				<row>
+			
+					<toolbarbutton id ="upVotes"  style = "color:green; font-weight:bold; font-size:14px" />
+					<toolbarbutton id = "dnVotes"  style = "color:red; font-weight:bold; font-size:14px"/>
+					<label/><label/><label/><label/><label/><label/><label/><label/>
+				</row>
+				<row><label/></row>
+				<row>
+					<cell colspan = "12">
+						<label id = "description" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "12">
+						<label id = "refs" value = "References: References go here" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row><label/></row>
+				<row>
+				<cell colspan = "13">
+					<button id = "downloadLink" mold = "trendy" label = "View This Paper" style = "font-weight:bold; font-size:14px"/>
+				</cell>
+				</row>
+				<row>
+					<cell colspan = "13">
+						<button id = "reviewLink" mold = "trendy" label = "View Reviews" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "13">
+						<button id = "addReviewLink" mold = "trendy" label = "Add Your Own Review" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

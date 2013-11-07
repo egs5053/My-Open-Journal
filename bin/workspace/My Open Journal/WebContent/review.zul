@@ -1,0 +1,53 @@
+<?page title="MyOpenJournal - View Review" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+
+	<window width = "722px">
+		<grid oddRowSclass="none" apply="Test.Review">
+			<rows>
+				<row>
+					<cell colspan = "13">
+						<hbox width ="100%" height = "20px">
+							<label id = "reviewTitle" style="font-weight:bold; font-size:20px"/>
+						</hbox>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "13">
+						<label id = "byAuthor" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row><label/></row>
+				<row>
+					<toolbarbutton id ="upVotes" label = "▲ up" style = "color:green; font-weight:bold; font-size:14px" />
+					<toolbarbutton id = "dnVotes" label = "▼ dn" style = "color:red; font-weight:bold; font-size:14px"/>
+					<label/><label/><label/><label/><label/><label/><label/><label/>
+				</row>
+				<row><label/></row>
+				<row>
+					<cell colspan = "13">
+					<textbox id = "text" width = "600px" mold = "rounded" rows = "13" readonly="true"/>
+					</cell>
+				</row>
+				<row>
+				</row>
+				<row><label/></row>
+				<row>
+					<cell colspan = "13">
+						<button id = "toComments" mold = "trendy" label = "View Comments" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "13">
+						<button id = "addComment" mold = "trendy" label = "Add Your Own Comment" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "13">
+						<button id = "backToPaper" mold = "trendy" label = "Back to Paper" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

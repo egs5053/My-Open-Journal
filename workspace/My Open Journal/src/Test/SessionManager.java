@@ -43,7 +43,7 @@ public class SessionManager extends SelectorComposer<Component> implements Initi
 	
 	public static int GetPaper(){
 		Session zkSession = Executions.getCurrent().getDesktop().getSession();
-		int paperID = (int) zkSession.getAttribute("paper");
+		int paperID = (Integer) zkSession.getAttribute("paper");
 		return paperID;
 	}
 	
@@ -53,7 +53,7 @@ public class SessionManager extends SelectorComposer<Component> implements Initi
 	
 	public static int GetReviewID() {
 		Session zkSession = Executions.getCurrent().getDesktop().getSession();
-		int id = (int) zkSession.getAttribute("review");
+		int id = (Integer) zkSession.getAttribute("review");
 		return id;
 	}
 

@@ -32,6 +32,26 @@ public class DBManager {
 			return null;
 		}
 	}
+
+	public boolean ResetPasswordKey(int id){
+		String query;
+		int resetCode = 10000 + (int)(Math.random() * ((99999 - 10000) + 1));
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "INSERT INTO PWReset (User_ID, Reset_Code) VALUES (?, ?);";
+    	try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			stmt.setInt(2, resetCode);
+			stmt.executeUpdate();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return true;
+		} 
+		catch (SQLException e) {
+			System.out.println("Failure to generate password reset code: " + e.getMessage());
+			return false;
+		}
+	}
 	
 	public boolean UpdatePaperWeight(int paperID)
 	{

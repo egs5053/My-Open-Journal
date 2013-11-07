@@ -1,0 +1,68 @@
+<?page title="MyOpenJournal - Submit Paper" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+	<window width="722px" apply="Test.Upload">	
+		<grid oddRowSclass="none" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+			<rows>
+				<row zclass="none">
+					<label value = "Submit Paper" style="color:black; font-weight:bold; font-size:20px"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "Title" sclass="boxLabel"/>
+				</row>
+				<row height = "30px">
+					<textbox id = "title" width="300px" constraint="no empty"/>		 
+					<hbox align="center">
+						<button id="uploadPaper" upload="true" style="font-weight:bold; font-size:14px" width="160px" label="Upload File" mold="trendy"/>					
+						<label value="(*.pdf only)"/>
+				 	</hbox>
+				</row>
+				<row zclass="none">
+					<label value="Co-Authors" sclass="boxLabel"/>
+					<textbox id = "filePath" width = "300px"/>	
+				</row>
+				<row>
+					<textbox id = "coauthors" width="300px"/>
+					<label value = "Description" sclass="boxLabel"/>
+				</row>
+				<row zclass="none">
+					<label value="References" sclass="boxLabel"/>
+					<cell rowspan = "6">
+					<textbox id = "description" width = "300px" constraint="no empty" rows = "13"/>
+					</cell>
+				</row>
+				<row>
+					<textbox width="300px"/>
+				</row>
+				<row zclass="none">
+					<label value="Category" sclass="boxLabel"/>
+				</row>
+				<row>
+					<combobox id = "category" width="300px">
+						<comboitem label="Science"/>
+						<comboitem label="Math"/>
+					</combobox>
+				</row>
+				<row zclass="none">
+					<hbox>
+						<label value="Tags" sclass="boxLabel"/>
+						<label value="(Seperated by a comma)" style="font-size:10px"/>
+					</hbox>
+				</row>
+				<row>
+					<textbox id = "tags" width="300px"/>
+				</row>
+				<row>
+					<cell colspan = "2">
+					<hbox pack = "start" width = "100%">
+						<button id="submitPaper"  style="color:black; font-weight:bold; font-size:14px" width="150px" label="Submit Paper" mold="trendy" onClick=""/>
+					</hbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

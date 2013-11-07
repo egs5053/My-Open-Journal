@@ -1,0 +1,129 @@
+<?page title="My Open Journal - Register" contentType="text/html;charset=UTF-12"?>
+<zk>
+<?init class="Test.SessionManager"?>
+<div height="1px"/>
+<window width="722px" apply="Test.Register">
+	<zscript><![CDATA[
+	   boolean hasZkex = true;
+	   try{
+		   Class.forName("org.zkoss.zkex.Version");
+	   }catch(Exception e){
+		   hasZkex = false;			   
+	   }						    
+	]]></zscript>
+	
+		<zscript>
+		<![CDATA[//@IMPORT
+		import org.zkoss.lang.Strings;
+		import org.zkoss.lang.Objects;
+		import java.sql.*;
+
+		
+		]]><![CDATA[//@DECLARATION 
+		
+		Constraint pwc = new Constraint() {
+	    	public void validate(Component comp, Object value) throws WrongValueException {
+		       	if (!Objects.equals(pwd.getValue(),value)){
+					throw new WrongValueException(comp, "Password doesn't match");
+		    	}
+	    	}
+	 	};
+	 	
+
+	 	
+	 	// Create Registration form
+		]]></zscript>
+		<div >
+			<grid oddRowSclass = "false" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+				<rows>
+					<row zclass="none">
+						<label value = "Register" style="color:black; font-weight:bold; font-size:20px;"/>
+					</row>
+					<row>
+						<label/>
+					</row>
+					<row zclass="none">
+						<label value = "First Name:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="first" width="200px" style = "font-size:16px"
+								constraint="/[0-9a-zA-Z-']+/" />
+						</hbox>
+					</row>
+					<row zclass="none">
+						<label value = "Last Name:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="last" width="200px" style = "font-size:16px"
+								constraint="/[0-9a-zA-Z-']+/" />
+						</hbox>
+					</row>
+					<row zclass="none">
+						<label value = "Username:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="username" width="200px" style ="font-size:16px"
+								constraint="/[0-9a-zA-Z]+/" />
+						</hbox>
+					</row>
+					<row zclass="none">
+						<label value = "Password:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="pwd" width="200px" type="password" style = "font-size:16px"
+								constraint="/[0-9a-zA-Z]+/" />
+						</hbox>
+					</row>
+					<row zclass="none">
+						<label value = "Confirm Password:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="pwd2" width="200px" type="password" style = "font-size:16px"
+							constraint="${pwc}" />
+						</hbox>
+					</row>
+					<row zclass="none">
+						<label value = "Email:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox align = "center">
+							<textbox id="email" width="200px" style = "font-size:16px"
+								constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" />
+						</hbox>
+					</row>			
+					<row zclass="none">
+						<label value = "Credentials:" sclass="boxLabel"/>
+					</row>
+					<row>
+						<hbox>
+							<checkbox id="professor"></checkbox>
+							<label value ="Professor" style = "color:black; font-size:14px"/>
+						</hbox>
+					</row>
+					<row>
+						<hbox>
+							<checkbox id="masters"></checkbox>
+							<label value ="Masters" style = "color:black; font-size:14px"/>
+						</hbox>
+					</row>
+					<row>
+						<hbox>
+							<checkbox id="PhD"></checkbox>					
+							<label value ="PhD" style = "color:black; font-size:14px"/>
+						</hbox>
+					</row>
+
+				<row>
+				<button id="registerButton" label="Register" style = "color:black; font-weight:bold; font-size:14px" mold = "trendy"/>
+			</row>
+			</rows>
+			</grid>			
+
+		</div>
+</window>
+</zk>

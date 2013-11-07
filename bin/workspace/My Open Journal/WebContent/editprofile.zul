@@ -1,0 +1,93 @@
+<?page title="Edit Profile" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+	<window  apply="Test.EditProfile" >
+	<zscript><![CDATA[
+	   boolean hasZkex = true;
+	   try{
+		   Class.forName("org.zkoss.zkex.Version");
+	   }catch(Exception e){
+		   hasZkex = false;			   
+	   }						    
+	]]></zscript>
+	
+		<zscript>
+		<![CDATA[//@IMPORT
+		import org.zkoss.lang.Strings;
+		import org.zkoss.lang.Objects;
+		import java.sql.*;
+
+		
+		]]><![CDATA[//@DECLARATION 
+		
+		Constraint pwc = new Constraint() {
+	    	public void validate(Component comp, Object value) throws WrongValueException {
+		       	if (!Objects.equals(newPass.getValue(),value)){
+					throw new WrongValueException(comp, "Password doesn't match");
+		    	}
+	    	}
+	 	};
+	 	
+
+	 	
+	 	// Create Registration form
+		]]></zscript>
+
+		<grid oddRowSclass = "false" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+			<rows>
+				<row zclass="none">
+					<label value = "Edit Profile" style="color:black; font-weight:bold; font-size:20px;"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "First Name:" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox id="firstName" width="300px" />
+				</row>
+				<row zclass="none">
+					<label  value="Last Name:" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox id="lastName" width="300px" />
+				</row>
+				<row zclass="none">
+					<label value="Affiliation" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox width="300px" />
+				</row>
+				<row zclass="none">
+					<hbox>
+					<label value="Current Password" sclass="boxLabel"/>
+					<label value="(current password must be entered to make profile changes)" style="font-size: 10px;"/>
+					</hbox>
+				</row>
+				<row>
+					<textbox id ="currentPass" width="300px"  type="password"/>
+				</row>
+				<row zclass="none">
+					<label value="New Password" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox id = "newPass" width="300px" type="password"/>
+				</row>
+				<row zclass="none">
+					<label value = "Confirm New Password:" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox id="pwd2" width="300px" type="password" constraint="${pwc}" />
+				</row>
+				<row>
+					<button id="saveChanges" width="150px" style="font-weight:bold; font-size:14px" label="Save Changes" mold="trendy" onClick=""></button>
+				</row>
+			</rows>
+
+		</grid>
+		</window>
+		
+		<zscript> 
+		</zscript> 
+</zk>

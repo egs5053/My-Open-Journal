@@ -397,6 +397,33 @@ public class DBManager {
 		}
 		return null;
 	}
+
+	public List<Data> GetUserPapers(String user) {
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select * from Papers where Username= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, user);
+			rs = stmt.executeQuery();
+	    	List<Data> rowValues = new ArrayList<Data>();
+
+	    	while (rs.next()) {
+	    		Data data = new Data(rs.getString(4), rs.getString(9), rs.getString(10), rs.getInt(1));
+	    	    rowValues.add(data);
+	    	}
+
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return rowValues;
+		} 
+		catch (SQLException e) {
+			System.out.println("Failure to Get User Papers: " + e.getMessage());
+		}
+		return null;
+	}
 	
 	public String GetFirstName(String user)
 	{

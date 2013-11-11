@@ -398,14 +398,14 @@ public class DBManager {
 		return null;
 	}
 
-	public List<Data> GetUserPapers(String user) {
+	public List<Data> GetUserPapers(int id) {
 		String query;
 		ResultSet rs;
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "select * from Papers where Username= ?;";
+    	query = "select * from Papers where Author_ID= ?;";
 		try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setString(1, user);
+			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 	    	List<Data> rowValues = new ArrayList<Data>();
 

@@ -1,29 +1,27 @@
 <?page title="MyOpenJournal - User Profile" contentType="text/html;charset=UTF-8"?>
 <zk>
 <?init class="Test.SessionManager"?>
-	<window width="722px">	
-		<grid id="userPapers" apply="Test.UserProfile" oddRowSclass="none" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
-			<rows>
-				<row zclass="none">
-					<label id="name" value="Ian Shields" style="color:black; font-weight:bold; font-size:20px"/>
-				</row>
-				<row>
-					<label/>
-				</row>
-				<row>
-					<label id="registrationDate" value = "Registration Date: 00/00/0000"/>
-				</row>
-				<row zclass="none">
-					<label value="Uploaded Papers:" sclass="boxLabel"/>
-				</row>
-				<grid id="papersCol">
-  				<columns menupopup="auto">
-    				<column width = "70%" label="Title" style = "color:black"/>
-    				<column label="▲Up" align = "center" style = "color:green"/>
-    				<column label="▼Down" align ="center" style = "color:red"/>
-  				</columns>
-			</grid>
-			</rows>
-		</grid>
-	</window>
+	<grid id="userPapers" apply="Test.UserProfile" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+		<rows>
+			<row zclass="none">
+				<label id="name" value="Ian Shields" style="color:black; font-weight:bold; font-size:20px"/>
+			</row>
+			<row>
+				<label/>
+			</row>
+			<row>
+				<label id="registrationDate" value = "Registration Date: 00/00/0000"/>
+			</row>
+			<row zclass="none">
+				<label value="Uploaded Papers:" sclass="boxLabel"/>
+			</row>
+		</rows>
+	</grid>
+	<grid id="papersCol">
+				<columns menupopup="auto">
+				<column width = "70%" label="Title" style = "color:black"/>
+				<column label="▲Up" align = "center" style = "color:green"/>
+				<column label="▼Down" align ="center" style = "color:red"/>
+				</columns>
+	</grid>
 </zk>

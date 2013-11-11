@@ -71,10 +71,12 @@
 		public void doAfterCompose(Grid comp) {
 			DBManager manager = new DBManager();
 			String user;
+			int id;
 			try {
 				super.doAfterCompose(comp);
 				user = SessionManager.GetUser();
-				DisplayResult(papersCol, manager.GetUserPapers(user));
+				id = manager.GetID(user);
+				DisplayResult(papersCol, manager.GetUserPapers(id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

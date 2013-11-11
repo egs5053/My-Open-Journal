@@ -1,0 +1,61 @@
+package Test;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.*;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Messagebox.ClickEvent;
+import org.zkoss.zul.Textbox;
+
+// Registers the user with info specified in registration form and inserts a new
+// entry into the database
+public class Register extends SelectorComposer<Component> {
+	
+	// Textbox components from registration page
+	@Wire
+	Textbox first;	
+	@Wire
+	Textbox last;
+	@Wire
+	Textbox username;
+	@Wire
+	Textbox email;
+	@Wire
+	Textbox pwd;
+	
+	// Runs when user clicks register button
+    @Listen("onClick = #registerButton")
+    public void InsertUser() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String pass = SessionManager.saltAndHash(pwd.getText());
+		Date date = new Date();
+    	DBManager manager = new DBManager();
+    	// Query Database for user, if it doesn't exist, insert user,
+    	//	otherwise, prompt for a new username
+    	boolean doesExist = manager.IsValidUser(username.getText());
+    	
+    	EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+			public void onEvent(ClickEvent event)
+			{
+				Executions.sendRedirect("index.zul");
+			}
+		};
+    	if (doesExist) {
+    		// Prompt for different username
+    		Messagebox.show(username.getText() + " already exists! Please choose different username", "", new Messagebox.Button[]{
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    	} else {	
+	    	// Insert User into database
+	    	manager.InsertUser(username.getText(), first.getText(), last.getText(), pass, email.getText(), "0", dateFormat.format(date)); 
+			
+			Messagebox.show(username.getText() + " has successfully registered!!", "", new Messagebox.Button[]{
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    	}
+    }
+	
+}

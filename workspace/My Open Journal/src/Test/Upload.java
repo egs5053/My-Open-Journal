@@ -31,6 +31,9 @@ public class Upload extends SelectorComposer<Component> {
 	@Wire
 	Textbox filePath;
 	
+	@Wire 
+	Textbox author;
+	
 	//
 	@Listen("onClick = #submitPaper")
 	public void InsertPaper()
@@ -44,6 +47,7 @@ public class Upload extends SelectorComposer<Component> {
     	user = SessionManager.GetUser();
     	id = manager.GetID(user);
     	path = "papers\\" + user + "\\" + filePath.getText();
+    	
     	manager.InsertPaper(id, title.getText(), path, description.getText(), dateFormat.format(date));
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
 			public void onEvent(ClickEvent event)
@@ -61,14 +65,24 @@ public class Upload extends SelectorComposer<Component> {
 		
 		// Get the path to upload the file to
 		String path = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+		
+		
 		path = path + "papers\\" + SessionManager.GetUser() + "\\";
 		Media media = event.getMedia();
 		if(media == null)
 			System.out.println("NULL!!");
-    	filePath.setText(media.getName());		
-		// Copy file to server
+
+    	// Copy file to server
 		try {
 			Files.copy(new File(path + media.getName()), media.getStreamData());
+			
+			// Parse the PDF and store the information in the database
+			String[] pdfInfo = PDFParse.parsePDF(new File(path + media.getName()));
+	    	title.setText(pdfInfo[0]);
+			author.setText(pdfInfo[1]);
+			description.setText(pdfInfo[2]);
+			
+			filePath.setText(media.getName());
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block

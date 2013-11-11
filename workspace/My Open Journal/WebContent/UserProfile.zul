@@ -1,0 +1,22 @@
+<?page title="MyOpenJournal - User Profile" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+	<window width="722px" apply="Test.Upload">	
+		<grid oddRowSclass="none" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+			<rows>
+				<row zclass="none">
+					<label id="name" style="color:black; font-weight:bold; font-size:20px"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "Registration Date:" sclass="boxLabel"/><label value="test"/>
+				</row>
+				<row zclass="none">
+					<label value="Uploaded Papers:" sclass="boxLabel"/>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

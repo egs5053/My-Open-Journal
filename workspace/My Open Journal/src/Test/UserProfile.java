@@ -76,6 +76,8 @@
 				super.doAfterCompose(comp);
 				user = SessionManager.GetUser();
 				id = manager.GetID(user);
+				Messagebox.show("Username: " + user + ", ID = " + id, "", new Messagebox.Button[]{
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
 				DisplayResult(papersCol, manager.GetUserPapers(id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

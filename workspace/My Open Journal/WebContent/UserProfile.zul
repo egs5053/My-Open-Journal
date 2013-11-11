@@ -4,7 +4,7 @@
 	<grid id="userPapers" apply="Test.UserProfile" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
 		<rows>
 			<row zclass="none">
-				<label id="name" value="Ian Shields" style="color:black; font-weight:bold; font-size:20px"/>
+				<label id="name" style="color:black; font-weight:bold; font-size:20px"/>
 			</row>
 			<row>
 				<label/>

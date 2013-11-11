@@ -405,7 +405,7 @@ public class DBManager {
     	query = "select * from Papers where Author_ID= ?;";
 		try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setString(1, id);
+			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 	    	List<Data> rowValues = new ArrayList<Data>();
 

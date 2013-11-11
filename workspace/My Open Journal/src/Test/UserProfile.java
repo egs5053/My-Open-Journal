@@ -9,7 +9,7 @@
 	import org.zkoss.zk.ui.select.annotation.Wire;
 	import org.zkoss.zul.*;
 
-	public class Home extends SelectorComposer<Grid>{
+	public class UserProfile extends SelectorComposer<Grid>{
 		@Wire
 		Grid papersCol;
 

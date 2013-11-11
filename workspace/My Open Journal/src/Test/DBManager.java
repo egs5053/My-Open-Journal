@@ -411,6 +411,7 @@ public class DBManager {
 
 	    	while (rs.next()) {
 	    		Data data = new Data(rs.getString(4), rs.getString(9), rs.getString(10), rs.getInt(1));
+	    		System.out.println(rs.getString(4) + ", " + rs.getString(9) + ", " + rs.getString(10) + ", " + rs.getInt(1));
 	    	    rowValues.add(data);
 	    	}
 

@@ -94,7 +94,7 @@ public class PDFParse {
 	        String[] returnString = String[3];
 	        returnString[0] = theTitle;
 	        returnString[1] = theAuthor;
-	        returnString[3] = abstractString;
+	        returnString[2] = abstractString;
 	        
 	        return returnString;
 	        

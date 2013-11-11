@@ -76,6 +76,12 @@
 				super.doAfterCompose(comp);
 				user = SessionManager.GetUser();
 				id = manager.GetID(user);
+				EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+					public void onEvent(ClickEvent event)
+					{
+						Executions.sendRedirect("index.zul");
+					}
+				};
 				Messagebox.show("Username: " + user + ", ID = " + id, "", new Messagebox.Button[]{
 		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
 				DisplayResult(papersCol, manager.GetUserPapers(id));

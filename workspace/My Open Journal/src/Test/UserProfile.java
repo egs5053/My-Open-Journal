@@ -8,6 +8,7 @@
 	import org.zkoss.zk.ui.select.SelectorComposer;
 	import org.zkoss.zk.ui.select.annotation.Wire;
 	import org.zkoss.zul.*;
+	import org.zkoss.zul.Messagebox.ClickEvent;
 
 	public class UserProfile extends SelectorComposer<Grid>{
 		@Wire
@@ -24,18 +25,13 @@
 			Executions.sendRedirect("index.zul");
 		}
 
-		public void onCreate$name() {
-			String user;
-			String first;
-			String last;
-			DBManager manager = new DBManager();
+		// public void onCreate$name() {
+		// 	String user;
+			
+		// 	DBManager manager = new DBManager();
 
-			user = SessionManager.GetUser();
-			first = manager.GetFirstName(user);
-			last = manager.GetLastName(user);
-
-			name.setValue(first + " " + last);
-		}
+			
+		// }
 
 		// Displays the top 10 papers
 		public void DisplayResult(Grid myGrid, List<Data> data)
@@ -45,9 +41,9 @@
 		    for(Data d : data)
 		    {
 		    	final int id = d.GetID();
-		    	System.out.println("ID ", id);
+		    	System.out.println("ID " + id);
 		        Label title= new Label(d.GetTitle());
-		        System.out.println("ID ", title);
+		        System.out.println("ID " + title.getValue());
 		        title.addEventListener("onClick", new EventListener<Event>()
 		        {
 					@Override
@@ -58,9 +54,9 @@
 		        }
 		        );
 		        Label upvotes = new Label(d.GetUpvotes());
-		        System.out.println("upvotes ", upvotes);
+		        System.out.println("upvotes " + upvotes.getValue());
 		        Label downvotes = new Label(d.GetDownvotes());
-		        System.out.println("downvotes ", downvotes);
+		        System.out.println("downvotes " + downvotes.getValue());
 
 		        Row row = new Row();    
 
@@ -75,6 +71,8 @@
 		public void doAfterCompose(Grid comp) {
 			DBManager manager = new DBManager();
 			String user;
+			String first;
+			String last;
 			int id;
 			try {
 				super.doAfterCompose(comp);
@@ -88,6 +86,12 @@
 				};
 				Messagebox.show("Username: " + user + ", ID = " + id, "", new Messagebox.Button[]{
 		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+
+				first = manager.GetFirstName(user);
+				last = manager.GetLastName(user);
+
+				name.setValue(first + " " + last);
+
 				DisplayResult(papersCol, manager.GetUserPapers(id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

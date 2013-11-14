@@ -17,7 +17,7 @@
 			</row>
 		</rows>
 	</grid>
-	<grid id="papersCol">
+	<grid id="papersCol" apply="Test.UserProfile">
 				<columns menupopup="auto">
 				<column width = "70%" label="Title" style = "color:black"/>
 				<column label="▲Up" align = "center" style = "color:green"/>

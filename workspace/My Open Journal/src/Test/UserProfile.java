@@ -25,14 +25,6 @@
 			Executions.sendRedirect("index.zul");
 		}
 
-		// public void onCreate$name() {
-		// 	String user;
-			
-		// 	DBManager manager = new DBManager();
-
-			
-		// }
-
 		// Displays the top 10 papers
 		public void DisplayResult(Grid myGrid, List<Data> data)
 		{
@@ -78,15 +70,6 @@
 				super.doAfterCompose(comp);
 				user = SessionManager.GetUser();
 				id = manager.GetID(user);
-				EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
-					public void onEvent(ClickEvent event)
-					{
-						Executions.sendRedirect("index.zul");
-					}
-				};
-				Messagebox.show("Username: " + user + ", ID = " + id, "", new Messagebox.Button[]{
-		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
-
 				first = manager.GetFirstName(user);
 				last = manager.GetLastName(user);
 

@@ -1,0 +1,94 @@
+<?page title="MyOpenJournal - Advanced Search" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+	<window width="722px" apply="Test.Upload">	
+	    <radiogroup id="authorContains" onCheck="choice1.value = self.selectedItem.label" />
+		<radiogroup id="authorAndOr" onCheck="choice2.value = self.selectedItem.label" />
+		<radiogroup id="coAuthorContains" onCheck="choice3.value = self.selectedItem.label" />
+		<radiogroup id="coAuthorAndOr" onCheck="choice4.value = self.selectedItem.label" />
+		<radiogroup id="abstractContains" onCheck="choice5.value = self.selectedItem.label" />
+		<radiogroup id="abstractAndOr" onCheck="choice6.value = self.selectedItem.label" />
+		<radiogroup id="categoryAndOr" onCheck="choice6.value = self.selectedItem.label" />
+		<grid oddRowSclass="none" style="border: none; margin-left: 20px;" sclass="tblWithoutHover">
+			<rows>
+				<row zclass="none">
+					<label value = "Advanced Search" style="color:black; font-weight:bold; font-size:20px"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label value = "Author" sclass="boxLabel"/>
+				</row>
+				<row height = "30px">
+					<textbox id = "author" width="300px" constraint="no empty"/>		 
+					<hbox align="center">
+						<radio id="auth1" label="Contains" radiogroup="authorContains" /><radio id="auth2" label="Matches" radiogroup="authorContains" />
+				 	</hbox>
+				</row>
+				<row height = "30px">
+					<hbox align="center">
+					<radio id="authAnd" label="And" radiogroup="authorAndOr" /><radio id="authOr" label="Or" radiogroup="authorAndOr" />
+					</hbox>
+				</row>
+				<row zclass="none">
+					<label value="Co-Authors" sclass="boxLabel"/>
+				</row>
+				<row>
+					<textbox id = "coauthors" width="300px"/>
+					<hbox align="center">
+						<radio id="coauth1" label="Contains" radiogroup="authorContains" /><radio id="coauth2" label="Matches" radiogroup="authorContains" />
+				 	</hbox>
+				</row>
+				<row height = "30px">
+					<hbox align="center">
+					<radio id="coAuthAnd" label="And" radiogroup="coAuthorAndOr" /><radio id="coAuthOr" label="Or" radiogroup="coAuthorAndOr" />
+					</hbox>
+				</row>
+				<row zclass="none">
+					<label value="Abstract" sclass="boxLabel"/>					
+				</row>
+				<row height = "30px">
+					<textbox id = "abstract" width="300px" constraint="no empty"/>		 
+					<hbox align="center">
+						<radio id="abs1" label="Contains" radiogroup="abstractContains" /><radio id="abs2" label="Matches" radiogroup="abstractContains" />
+				 	</hbox>
+				</row>
+				<row height = "30px">
+					<hbox align="center">
+					<radio id="absAnd" label="And" radiogroup="abstractAndOr" /><radio id="absOr" label="Or" radiogroup="abstractAndOr" />
+					</hbox>
+				</row>
+				<row zclass="none">
+					<label value="Category" sclass="boxLabel"/>
+				</row>
+				<row>
+					<combobox id = "category" width="300px">
+						<comboitem label="Science"/>
+						<comboitem label="Math"/>
+					</combobox>
+				</row>
+				<row height = "30px">
+					<hbox align="center">
+					<radio id="catAnd" label="And" radiogroup="categoryAndOr" /><radio id="catOr" label="Or" radiogroup="categoryAndOr" />
+					</hbox>
+				</row>
+				<row zclass="none">
+					<hbox>
+						<label value="Tags" sclass="boxLabel"/>
+					</hbox>
+				</row>
+				<row>
+					<textbox id = "tags" width="300px"/>
+				</row>
+				<row>
+					<cell colspan = "2">
+					<hbox pack = "start" width = "100%">
+						<button id="search"  style="color:black; font-weight:bold; font-size:14px" width="150px" label="Search" mold="trendy" onClick=""/>
+					</hbox>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

@@ -52,9 +52,8 @@ public class Register extends SelectorComposer<Component> {
     	} else {	
 	    	// Insert User into database
 	    	manager.InsertUser(username.getText(), first.getText(), last.getText(), pass, email.getText(), "0", dateFormat.format(date)); 
+	    	Executions.sendRedirect("index.zul");
 			
-			Messagebox.show(username.getText() + " has successfully registered!!", "", new Messagebox.Button[]{
-		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
     	}
     }
 	

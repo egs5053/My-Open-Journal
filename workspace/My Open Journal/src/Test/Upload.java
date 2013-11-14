@@ -49,14 +49,7 @@ public class Upload extends SelectorComposer<Component> {
     	path = "papers\\" + user + "\\" + filePath.getText();
     	
     	manager.InsertPaper(id, title.getText(), path, description.getText(), dateFormat.format(date));
-		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
-			public void onEvent(ClickEvent event)
-			{
-				Executions.sendRedirect("index.zul");
-			}
-		};
-		Messagebox.show("You have successfully uploaded a paper!!", "", new Messagebox.Button[]{
-	        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+		Executions.sendRedirect("index.zul");
 	}
 	
 	// Uploads file to the server to directory C:\tomcat\webapps\ROOT\papers

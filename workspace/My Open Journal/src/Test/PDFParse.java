@@ -1,5 +1,6 @@
 package Test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import org.apache.pdfbox.util.PDFTextStripper;
 
 public class PDFParse {
 	
-	public String[] parsePDF(File file) {
+	public static String[] parsePDF(File file) {
 		InputStream inStream = null;
 		
 		try {
@@ -91,11 +92,12 @@ public class PDFParse {
 	        	abstractString = abstractString + tokens[j];
 	        }
 	        
-	        String[] returnString = String[3];
+	        String[] returnString = new String[3];
 	        returnString[0] = theTitle;
 	        returnString[1] = theAuthor;
 	        returnString[2] = abstractString;
 	        
+	        pdf.close();
 	        return returnString;
 	        
 		} catch (FileNotFoundException e) {
@@ -114,5 +116,6 @@ public class PDFParse {
 				}
 			}
 		}
+		return null;
 	}
 }

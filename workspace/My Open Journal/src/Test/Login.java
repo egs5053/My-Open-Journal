@@ -31,14 +31,8 @@ public class Login extends SelectorComposer<Component>{
     		// Check to see if password matches username
     		if(manager.IsValidPassword(username.getText(), pwd.getText())) {
     			SessionManager.setSession(username.getText(), pwd.getText());
-    			EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
-    				public void onEvent(ClickEvent event)
-    				{
-    					Executions.sendRedirect("index.zul");
-    				}
-    			};
-    			Messagebox.show(username.getText() + " has successfully logged in!!", "", new Messagebox.Button[]{
-    		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+    			Executions.sendRedirect("userprofile.zul");
+
     		}
     		else
     			Messagebox.show("Invalid password!!");    	

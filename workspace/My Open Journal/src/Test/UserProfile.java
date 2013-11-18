@@ -70,6 +70,9 @@
 				super.doAfterCompose(comp);
 				if (Executions.getCurrent().getParameter("user") != null) {
             		user = Executions.getCurrent().getParameter("user");
+            		if (!manager.IsValidUser(user)) {
+            			user = SessionManager.GetUser();
+            		}
         		} else {
 					user = SessionManager.GetUser();
 		        }

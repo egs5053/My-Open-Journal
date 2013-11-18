@@ -1,0 +1,11 @@
+<zk>
+	<window id="search_bar" title="Search" width="240px" border="normal" apply="Test.Search">
+    <hbox align="center">
+        <textbox id="keywordBox" />
+        <button id="searchButton" label="Search" />
+    </hbox>
+    <hlayout sclass="search" style="text-align: left;">
+		<a href="advanced_search.zul" sclass="navbar">Advanced Search</a>
+	</hlayout>
+	</window>
+</zk>

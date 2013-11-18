@@ -1,0 +1,37 @@
+<?page title="Search Results" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+
+<!--<grid id = "ResultGrid" style="margin-top: -20px;">
+	<label value = "Results" style = "color: black; font-weight:bold; font-size:14px"/>
+  		<columns menupopup="auto">
+    		<column label="Title" style = "color:black"/>
+    		<column label="Author" style = "color:black"/>
+    		<column label="Description" style = "color:black"/>
+  		</columns>
+  	<template name="model">
+        <row>
+            <label value="${each.title}" />
+            <label value="${each.authorID}" />
+            <label value="${each.description}" />
+        </row>
+    </template>
+</grid>
+</zk> -->
+
+
+<listbox id="Results" apply="Test.SearchResults" emptyMessage="No results for xxxxxx" style="margin-top:10px">
+        <listhead>
+            <listheader label="Paper" />
+            <listheader label="Author" />
+            <listheader label="Description" />
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="${each.GetTitle()}"></listcell>
+                <listcell label="${each.GetAuthor()}"></listcell>
+                <listcell label="${each.GetDescription()}"></listcell>
+            </listitem>
+        </template>
+    </listbox>
+</zk>

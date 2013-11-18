@@ -76,11 +76,15 @@
         		} else {
 					user = SessionManager.GetUser();
 		        }
+
+		        System.out.println("Username = " + user);
+
 		        id = manager.GetID(user);
 				first = manager.GetFirstName(user);
 				last = manager.GetLastName(user);
 
 				name.setValue(first + " " + last);
+				registrationDate.setValue(manager.GetRegistrationDate(id));
 
 				DisplayResult(papersCol, manager.GetUserPapers(id));
 			} catch (Exception e) {

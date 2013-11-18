@@ -143,13 +143,12 @@ public class Paper extends SelectorComposer<Grid> {
 		username = manager.GetUsername(author);
 		firstName = manager.GetFirstName(username);
 		lastName = manager.GetLastName(username);
-		byAuthor.setValue("Author: " + firstName + lastName);
+		byAuthor.setValue("Author: <a href=\"#\">" + firstName + " " + lastName + "</a>");
 
 		byAuthor.addEventListener("onClick", new EventListener<Event>()
 	        {
 				@Override
 				public void onEvent(Event event) throws Exception {
-					SessionManager.SetPaper(id);
 					Executions.sendRedirect("userprofile.zul?user=" + username);
 				}
 	        }

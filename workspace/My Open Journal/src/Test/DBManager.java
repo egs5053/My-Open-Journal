@@ -9,6 +9,33 @@ public class DBManager {
 
 	private DBConnection connection;
 	
+	public List<PaperData> KeywordSearch(String keyword)
+	{
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select * from Papers where contains(Title, ?) or contains(Description, ?);";
+    	try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, keyword);
+			stmt.setString(2, keyword);
+			rs = stmt.executeQuery();
+	    	List<PaperData> rowValues = new ArrayList<PaperData>();
+	    	while (rs.next()) {
+	    		PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+	    	    rowValues.add(data);
+	    	}
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return rowValues;
+		}
+		catch (SQLException e) {
+			System.out.println("Failure to search Papers: " + e.getMessage());
+			return null;
+		}
+	}
+
 	public String GetPaperDate(int id)
 	{
 		String date;

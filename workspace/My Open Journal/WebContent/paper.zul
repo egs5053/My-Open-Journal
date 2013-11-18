@@ -13,7 +13,7 @@
 				</row>
 				<row>
 					<cell colspan = "12">
-						<label id = "byAuthor" style = "font-weight:bold; font-size:14px"/>
+						<a href="#"><label id = "byAuthor" style = "font-weight:bold; font-size:14px"/></a>
 					</cell>
 				</row>
 				<row><label/></row>

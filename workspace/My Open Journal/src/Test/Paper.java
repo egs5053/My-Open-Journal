@@ -143,7 +143,7 @@ public class Paper extends SelectorComposer<Grid> {
 		username = manager.GetUsername(author);
 		firstName = manager.GetFirstName(username);
 		lastName = manager.GetLastName(username);
-		byAuthor.setValue("Author: <a href=\"#\">" + firstName + " " + lastName + "</a>");
+		byAuthor.setValue("Author: " + firstName + " " + lastName);
 
 		byAuthor.addEventListener("onClick", new EventListener<Event>()
 	        {

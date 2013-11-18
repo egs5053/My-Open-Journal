@@ -168,7 +168,7 @@ public class DBManager {
 	    	return user;
 		} 
 		catch (SQLException e) {
-			System.out.println("Failure to Get Top Papers: " + e.getMessage());
+			System.out.println("Failure to Get Username: " + e.getMessage());
 			return null;
 		}
 	}
@@ -192,7 +192,7 @@ public class DBManager {
 	    	return date.toString();
 		} 
 		catch (SQLException e) {
-			System.out.println("Failure to Get Top Papers: " + e.getMessage());
+			System.out.println("Failure to Get Registration Date: " + e.getMessage());
 			return null;
 		}
 	}

@@ -84,7 +84,7 @@
 				last = manager.GetLastName(user);
 
 				name.setValue(first + " " + last);
-				registrationDate.setValue(manager.GetRegistrationDate(id));
+				registrationDate.setValue("Registration Date: " + manager.GetRegistrationDate(id));
 
 				DisplayResult(papersCol, manager.GetUserPapers(id));
 			} catch (Exception e) {

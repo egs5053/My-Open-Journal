@@ -68,8 +68,12 @@
 			int id;
 			try {
 				super.doAfterCompose(comp);
-				user = SessionManager.GetUser();
-				id = manager.GetID(user);
+				if (Executions.getCurrent().getParameter("user") != null) {
+            		user = Executions.getCurrent().getParameter("user");
+        		} else {
+					user = SessionManager.GetUser();
+		        }
+		        id = manager.GetID(user);
 				first = manager.GetFirstName(user);
 				last = manager.GetLastName(user);
 

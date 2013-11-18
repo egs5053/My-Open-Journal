@@ -136,10 +136,24 @@ public class Paper extends SelectorComposer<Grid> {
 	public void SetAuthor() {
 		int author;
 		String username;
+		String firstName;
+		String lastName;
 		DBManager manager = new DBManager();
 		author = manager.GetPaperAuthor(paperID);
 		username = manager.GetUsername(author);
-		byAuthor.setValue("Author: " + manager.GetUsername(author));
+		firstName = manager.GetFirstName(username);
+		lastName = manager.GetLastName(username);
+		byAuthor.setValue("Author: " + firstName + lastName);
+
+		byAuthor.addEventListener("onClick", new EventListener<Event>()
+	        {
+				@Override
+				public void onEvent(Event event) throws Exception {
+					SessionManager.SetPaper(id);
+					Executions.sendRedirect("userprofile.zul?user=" + username);
+				}
+	        }
+	        );
 	}
 
 	public void SetDescription() {

@@ -33,9 +33,7 @@
 		    for(Data d : data)
 		    {
 		    	final int id = d.GetID();
-		    	System.out.println("ID " + id);
 		        Label title= new Label(d.GetTitle());
-		        System.out.println("ID " + title.getValue());
 		        title.addEventListener("onClick", new EventListener<Event>()
 		        {
 					@Override
@@ -46,9 +44,7 @@
 		        }
 		        );
 		        Label upvotes = new Label(d.GetUpvotes());
-		        System.out.println("upvotes " + upvotes.getValue());
 		        Label downvotes = new Label(d.GetDownvotes());
-		        System.out.println("downvotes " + downvotes.getValue());
 
 		        Row row = new Row();    
 
@@ -77,7 +73,6 @@
 					user = SessionManager.GetUser();
 		        }
 
-		        System.out.println("Username = " + user);
 
 		        id = manager.GetID(user);
 				first = manager.GetFirstName(user);

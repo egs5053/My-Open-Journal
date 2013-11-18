@@ -149,6 +149,9 @@ public class Paper extends SelectorComposer<Grid> {
 	        {
 				@Override
 				public void onEvent(Event event) throws Exception {
+					DBManager manager = new DBManager();
+					int author = manager.GetPaperAuthor(paperID);
+					String username = manager.GetUsername(author);
 					Executions.sendRedirect("userprofile.zul?user=" + username);
 				}
 	        }

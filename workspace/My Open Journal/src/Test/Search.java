@@ -17,7 +17,7 @@ public class Search extends SelectorComposer<Component> {
 	@Listen("onClick = #searchButton")
     public void search(){
         String keyword = keywordBox.getValue();
-        Executions.sendRedirect("search_results.zul?keyword=" + keyword);
+        Executions.sendRedirect("searchresults.zul?keyword=" + keyword);
         //DBManager manager = new DBManager();
         //List<PaperData> result = manager.KeywordSearch(keyword);
         

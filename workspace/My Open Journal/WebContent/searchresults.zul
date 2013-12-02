@@ -1,0 +1,19 @@
+<?page title="Search Results" contentType="text/html;charset=UTF-8"?>
+<zk>
+<?init class="Test.SessionManager"?>
+
+<listbox id="Results" apply="Test.SearchResults" emptyMessage="No results found" style="margin-top:10px">
+        <listhead>
+            <listheader label="Paper" />
+            <listheader label="Author" />
+            <listheader label="Description" />
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="${each.GetTitle()}"></listcell>
+                <listcell label="${each.GetAuthor()}"></listcell>
+                <listcell label="${each.GetDescription()}"></listcell>
+            </listitem>
+        </template>
+    </listbox>
+</zk>

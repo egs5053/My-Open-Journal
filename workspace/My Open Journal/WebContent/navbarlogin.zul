@@ -12,7 +12,7 @@
 		<a href="contact.zul" sclass="navbar">Contact</a>
 		<label sclass="navbar" value="|" />
 		<a href="http://www.google.com/moderator/#16/e=209656" sclass="navbar">Bug Report</a>
-		<include src="search_bar.zul" />
+		<include src="searchbar.zul" />
 	</hlayout>
 	<hlayout sclass="navbar" style="float: right; width: auto;">
 		<image src="logo2.png" height="100px" onClick="Test.Home.GoHome()" sclass="center" />

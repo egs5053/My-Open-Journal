@@ -257,8 +257,10 @@ public class DBManager {
 		}
 	}
 
-	public String GetEmail(Srting user)
+	public String GetEmail(String user)
 	{
+		String query;
+		ResultSet rs;
 		String email;
 
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
@@ -277,6 +279,31 @@ public class DBManager {
 		catch (SQLException e) {
 	    	connection.Disconnect();
 			return "";
+		}
+	}
+
+	public String GetResetCode(int id)
+	{
+		String query;
+		ResultSet rs;
+		int code;
+
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Reset_Code from PWReset where User_ID= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			code = rs.getString(1);
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+    		return code;
+		} 
+		catch (SQLException e) {
+	    	connection.Disconnect();
+			return -1;
 		}
 	}
 	

@@ -256,6 +256,29 @@ public class DBManager {
 			return -1;
 		}
 	}
+
+	public String GetEmail(Srting user)
+	{
+		String email;
+
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Email from Users where Username= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, user);
+			rs = stmt.executeQuery();
+			rs.next();
+			email = rs.getString(1);
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+    		return email;
+		} 
+		catch (SQLException e) {
+	    	connection.Disconnect();
+			return "";
+		}
+	}
 	
 	public String GetUsername(int id)
 	{

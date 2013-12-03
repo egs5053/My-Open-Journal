@@ -23,6 +23,7 @@ public class Reset extends SelectorComposer<Component>{
     	if(manager.IsValidUser(user)) {
     		int id = manager.GetID(user);
     		if(manager.ResetPasswordKey(id)){
+                Messagebox.show("Password key generated!");
     			//Add email sending code
     		}
     		else{

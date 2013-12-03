@@ -81,7 +81,7 @@ public class DBManager {
 	}
 
 	public List<PaperData> AdvancedSearch(String title, boolean titleAnd,
-											int authorID, boolean authorAnd, 
+											int authorID, boolean authorIDAnd, 
 											String abstract, boolean abstractAnd, 
 											String category, boolean categoryAnd,
 											String tags)

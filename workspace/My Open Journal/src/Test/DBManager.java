@@ -11,24 +11,105 @@ public class DBManager {
 	
 	public List<PaperData> KeywordSearch(String keyword)
 	{
-		String query;
+		int whitespacecount = 0;
+		for (int i = 0; i < keyword.length(); i++) {
+			if(Character.isWhitespace(keyword.charAt(i))){
+				whitespacecount++;
+			}
+		}
+		if(whitespacecount > 0) {
+			String[] keywords = keyword.split(" ");
+			String query;
+			ResultSet rs;
+			connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+			query = "select * from Papers where contains(Title, ?) or contains(Description, ?)";
+			try {
+				for (int i = 1; i < keywords.length; i++) {
+					query += "union select * from Papers where contains(Title, ?) or contains(Description, ?)";
+				}
+				PreparedStatement stmt = connection.GetConnection().prepareStatement(query + ";");
+				int j = 1;
+				for (int i = 0; i < keywords.length; i++) {
+					stmt.setString(j, keywords[i]);
+					j++;
+					stmt.setString(j, keywords[i]);
+					j++;
+				}
+				rs = stmt.executeQuery();
+				List<PaperData> rowValues = new ArrayList<PaperData>();
+				while (rs.next()) {
+					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+					rowValues.add(data);
+				}
+				rs.close();
+				stmt.close();
+				connection.Disconnect();
+				return rowValues;
+			}
+			catch (SQLException e) {
+				System.out.println("Failure to search Papers: " + e.getMessage());
+				return null;
+			}
+		}
+		if (whitespacecount == 0) {
+			
+			String query;
+			ResultSet rs;
+			connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+			query = "select * from Papers where contains(Title, ?) or contains(Description, ?);";
+			try {
+				PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+				stmt.setString(1, keyword);
+				stmt.setString(2, keyword);
+				rs = stmt.executeQuery();
+				List<PaperData> rowValues = new ArrayList<PaperData>();
+				while (rs.next()) {
+					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+					rowValues.add(data);
+				}
+				rs.close();
+				stmt.close();
+				connection.Disconnect();
+				return rowValues;
+			}
+			catch (SQLException e) {
+				System.out.println("Failure to search Papers: " + e.getMessage());
+				return null;
+			}
+		}
+		else { return null;}
+	}
+
+	public List<PaperData> AdvancedSearch(String title, boolean titleAnd,
+											int authorID, boolean authorAnd, 
+											String abstract, boolean abstractAnd, 
+											String category, boolean categoryAnd,
+											String tags)
+	{
+		String query = "select * from Papers where contains(title, ?) ? contains(Author_ID, ?) ? contains(Description, ?) ? contains(Category, ?) ? contains(Tags, ?);";
 		ResultSet rs;
-		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "select * from Papers where contains(Title, ?) or contains(Description, ?);";
-    	try {
+		try{
+			connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setString(1, keyword);
-			stmt.setString(2, keyword);
+			stmt.setString(1, "'\"" + title.replace(" ", "\" OR \"") + "\"'");
+			stmt.setString(2, (titleAnd)?"AND":"OR");
+			stmt.setInt(3, authorID);
+			stmt.setString(4, (authorAnd)?"AND":"OR");
+			stmt.setString(5, "'\"" + abstring.replace(" ", "\" OR \"") + "\"'");
+			stmt.setString(6, (abstractAnd)?"AND":"OR");
+			stmt.setString(7, category);
+			stmt.setString(8, (categoryAnd)?"AND":"OR");
+			stmt.setString(9, "'\"" + tags.replace(" ", "\" OR \"") + "\"'");
 			rs = stmt.executeQuery();
-	    	List<PaperData> rowValues = new ArrayList<PaperData>();
-	    	while (rs.next()) {
-	    		PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
-	    	    rowValues.add(data);
-	    	}
-	    	rs.close();
+			List<PaperData> rowValues = new ArrayList<PaperData>();
+			while (rs.next()) {
+				PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+				rowValues.add(data);
+			}
+			rs.close();
 			stmt.close();
-	    	connection.Disconnect();
-	    	return rowValues;
+			connection.Disconnect();
+			return rowValues;
 		}
 		catch (SQLException e) {
 			System.out.println("Failure to search Papers: " + e.getMessage());

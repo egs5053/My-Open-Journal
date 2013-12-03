@@ -17,7 +17,23 @@ public class Search extends SelectorComposer<Component> {
 	@Listen("onClick = #searchButton")
     public void search(){
         String keyword = keywordBox.getValue();
-        Executions.sendRedirect("searchresults.zul?keyword=" + keyword);
+        int whitespacecount = 0;
+		for (int i = 0; i < keyword.length(); i++) {
+			if(Character.isWhitespace(keyword.charAt(i))){
+				whitespacecount++;
+			}
+		}
+		if (whitespacecount == 0) {
+			Executions.sendRedirect("searchresults.zul?keyword=" + keyword);
+		}
+		else {
+			String[] keywords = keyword.split(" ");
+			String redirect = "searchresults.zul?keyword=";
+			for (String word : keywords) {
+				redirect += word + "%20";
+			}
+			Executions.sendRedirect(redirect);
+		}
         //DBManager manager = new DBManager();
         //List<PaperData> result = manager.KeywordSearch(keyword);
         

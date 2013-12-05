@@ -282,7 +282,7 @@ public class DBManager {
 		}
 	}
 
-	public String GetResetCode(int id)
+	public int GetResetCode(int id)
 	{
 		String query;
 		ResultSet rs;
@@ -295,7 +295,7 @@ public class DBManager {
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			rs.next();
-			code = rs.getString(1);
+			code = rs.getInt(1);
 	    	rs.close();
 			stmt.close();
 	    	connection.Disconnect();
@@ -344,8 +344,8 @@ public class DBManager {
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
     	query = "UPDATE Users SET Password = ? WHERE User_ID = ?";
 		try {
-			PreparedStatement stmt = connection.GetConnection().prepareStatement(query1);
-			stmt.setString(1, password);
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, pass);
 			stmt.setInt(2, id);
 			stmt.executeUpdate();
 			stmt.close();

@@ -91,12 +91,17 @@ public class PDFParse {
 	        for (int j = startCounter; j < endCounter; j++) {
 	        	abstractString = abstractString + tokens[j];
 	        }
-	              
+	        
+	        int maxTitleSize = 100;
+	        if (theTitle.length() >= maxTitleSize) {
+	        	abstractString = abstractString.substring(0, maxTitleSize - 1);	        	
+	        }
+	        
 	        
 	        // Ensure that the abstract is not too large for db
 	        int maxAbstractSize = 8000;
 	        if (abstractString.length() >= maxAbstractSize) {
-	        	abstractString = abstractString.substring(0, 7999);	        	
+	        	abstractString = abstractString.substring(0, maxAbstractSize - 1);	        	
 	        }
 	        
 	        

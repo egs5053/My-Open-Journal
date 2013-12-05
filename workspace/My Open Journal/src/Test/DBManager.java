@@ -435,6 +435,54 @@ public class DBManager {
 			return null;
 		}
 	}
+
+	public String GetPaperCategory(int id)
+	{
+		String category;
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Category from Papers where Paper_ID = ?;";
+    	try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			category = rs.getString(1);
+			rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return category;
+		} 
+		catch (SQLException e) {
+			System.out.println("Failure to Get Top Papers: " + e.getMessage());
+			return null;
+		}
+	}
+
+	public String GetPaperTags(int id)
+	{
+		String tags;
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Tags from Papers where Paper_ID = ?;";
+    	try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			tags = rs.getString(1);
+			rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return tags;
+		} 
+		catch (SQLException e) {
+			System.out.println("Failure to Get Top Papers: " + e.getMessage());
+			return null;
+		}
+	}
 	
 	public boolean InsertPaper(int authorID, String title, String path, String description, String date)
 	{

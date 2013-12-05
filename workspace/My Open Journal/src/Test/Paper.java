@@ -32,6 +32,12 @@ public class Paper extends SelectorComposer<Grid> {
 	Label description;
 
 	@Wire
+	Label category;
+
+	@Wire
+	Label tags;
+
+	@Wire
 	Toolbarbutton upVotes;
 
 	@Wire
@@ -163,6 +169,16 @@ public class Paper extends SelectorComposer<Grid> {
 		description.setValue("Description: " + manager.GetPaperDescription(paperID));
 	}
 
+	public void SetCategory(){
+		DBManager manager = new DBManager();
+		category.setValue("Category: " + manager.GetPaperCategory(paperID));
+	}
+
+	public void SetTags() {
+		DBManager manager = new DBManager();
+		tags.setValue("Tags: " + manager.GetPaperTags(paperID));
+	}
+
 	public void SetUpvotes() {
 		DBManager manager = new DBManager();
 		upVotes.setLabel("" + manager.GetPaperUpvotes(paperID) + "▲ up");
@@ -179,6 +195,8 @@ public class Paper extends SelectorComposer<Grid> {
 			SetTitle();
 			SetAuthor();
 			SetDescription();
+			SetCategory();
+			SetTags();
 			SetUpvotes();
 			SetDownvotes();
 		} catch (Exception e) {

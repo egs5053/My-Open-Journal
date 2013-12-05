@@ -31,7 +31,12 @@
 				</row>
 				<row>
 					<cell colspan = "12">
-						<label id = "refs" value = "References: References go here" style = "font-weight:bold; font-size:14px"/>
+						<label id = "category" style = "font-weight:bold; font-size:14px"/>
+					</cell>
+				</row>
+				<row>
+					<cell colspan = "12">
+						<label id = "tags" style = "font-weight:bold; font-size:14px"/>
 					</cell>
 				</row>
 				<row><label/></row>

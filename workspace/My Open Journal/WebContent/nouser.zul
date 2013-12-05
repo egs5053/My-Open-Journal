@@ -11,9 +11,6 @@
 				<row>
 					<label/>
 				</row>
-				<row zclass="none">
-					<label id = "username"/>
-				</row>
 		        <row>
 		        	<hbox align = "center">
 		       			<button id="home" label="Back to Home" style = "font-size:14px; font-weight:bold"/>

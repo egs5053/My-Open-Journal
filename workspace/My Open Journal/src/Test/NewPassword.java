@@ -27,13 +27,13 @@ public class NewPassword extends SelectorComposer<Component> {
 	// Runs when user clicks submit button
     @Listen("onClick = #submit")
     public void ResetPassword() {
-    	if (password.getText() != password2.getText()) {
+    	if (password.getText().equals(password2.getText()) {
     		Messagebox.show("Passwords do not match");
     	}
     	else {    		
 	    	DBManager manager = new DBManager();
 
-	    	int id = manager.getID(username.getText());
+	    	int id = manager.GetID(username.getText());
 	    	int code = Integer.parseInt(resetcode.getText());
 
 	    	if (manager.CheckResetCode(id, code)) {

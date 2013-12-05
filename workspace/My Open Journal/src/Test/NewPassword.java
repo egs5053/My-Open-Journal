@@ -27,7 +27,7 @@ public class NewPassword extends SelectorComposer<Component> {
 	// Runs when user clicks submit button
     @Listen("onClick = #submit")
     public void ResetPassword() {
-    	if (password.getText().equals(password2.getText()) {
+    	if (!password.getText().equals(password2.getText()) {
     		Messagebox.show("Passwords do not match");
     	}
     	else {    		

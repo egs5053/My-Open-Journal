@@ -34,7 +34,6 @@ public class Upload extends SelectorComposer<Component> {
 	@Wire 
 	Textbox author;
 	
-	//
 	@Listen("onClick = #submitPaper")
 	public void InsertPaper()
 	{
@@ -72,6 +71,7 @@ public class Upload extends SelectorComposer<Component> {
 			// Parse the PDF and store the information in the database
 			String[] pdfInfo = PDFParse.parsePDF(new File(path + media.getName()));
 	    	title.setText(pdfInfo[0]);
+	    	System.out.println("Value of author: " + pdfInfo[1]);
 			author.setText(pdfInfo[1]);
 			description.setText(pdfInfo[2]);
 			

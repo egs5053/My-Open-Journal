@@ -45,6 +45,8 @@
 					}
 		        }
 		        );
+		        title.setSclass("link");
+		        
 		        Label upvotes = new Label(d.GetUpvotes());
 		        System.out.println("upvotes " + upvotes.getValue());
 		        Label downvotes = new Label(d.GetDownvotes());

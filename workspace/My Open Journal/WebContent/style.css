@@ -6,13 +6,13 @@ html, body{
 	padding: 0px;
 }
 
-a:link, a:visited, a:hover, a:active {
+/*a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
 }  
 
 a:hover {
 	color:#FFFFFF;
-}
+}*/
 
 .header {
 	font-size: 42px;
@@ -62,8 +62,20 @@ a:hover {
 	box-shadow:         inset 0px 20px 20px -20px;
 }
 
+.link{
+	cursor: pointer;
+}
+
+a.navbar:link, a.navbar:visited, a.navbar:hover, a.navbar:active {
+	text-decoration: none;
+} 
+
+a.navbar:hover {
+	color:#FFFFFF;
+}
+
 .links{
-	padding-top: 80px; 
+	padding-top: 40px; 
 	padding-left: 4px; 
 	box-sizing: border-box; 
 	-moz-box-sizing: border-box; 

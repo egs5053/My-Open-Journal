@@ -82,7 +82,7 @@ public class DBManager {
 
 	public List<PaperData> AdvancedSearch(String title, boolean titleAnd,
 											int authorID, boolean authorIDAnd, 
-											String abstract, boolean abstractAnd, 
+											String myAbstract, boolean abstractAnd, 
 											String category, boolean categoryAnd,
 											String tags)
 	{
@@ -94,8 +94,8 @@ public class DBManager {
 			stmt.setString(1, "'\"" + title.replace(" ", "\" OR \"") + "\"'");
 			stmt.setString(2, (titleAnd)?"AND":"OR");
 			stmt.setInt(3, authorID);
-			stmt.setString(4, (authorAnd)?"AND":"OR");
-			stmt.setString(5, "'\"" + abstring.replace(" ", "\" OR \"") + "\"'");
+			stmt.setString(4, (authorIDAnd)?"AND":"OR");
+			stmt.setString(5, "'\"" + myAbstract.replace(" ", "\" OR \"") + "\"'");
 			stmt.setString(6, (abstractAnd)?"AND":"OR");
 			stmt.setString(7, category);
 			stmt.setString(8, (categoryAnd)?"AND":"OR");

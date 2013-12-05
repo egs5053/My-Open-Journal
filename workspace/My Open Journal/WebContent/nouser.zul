@@ -1,0 +1,25 @@
+<?page title="My Open Journal - No User" contentType="text/html;charset=UTF-12"?>
+
+<zk>
+<?init class="Test.SessionManager"?>
+	<window  apply="Test.NoUser" >
+		<grid oddRowSclass = "false" style="border: none; margin-left: 20px" sclass="tblWithoutHover">	    
+		    <rows>
+		    	<row zclass="none">
+					<label value = "User Not Found" style="color:black; font-weight:bold; font-size:20px"/>
+				</row>
+				<row>
+					<label/>
+				</row>
+				<row zclass="none">
+					<label id = "username"/>
+				</row>
+		        <row>
+		        	<hbox align = "center">
+		       			<button id="home" label="Back to Home" style = "font-size:14px; font-weight:bold"/>
+		       		</hbox>
+		        </row>
+		    </rows>
+		</grid>
+	</window>
+</zk>

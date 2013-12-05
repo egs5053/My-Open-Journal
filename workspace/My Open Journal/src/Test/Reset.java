@@ -13,8 +13,6 @@ public class Reset extends SelectorComposer<Component>{
 	@Wire 
 	Textbox username;
 	
-	// Checks to see if the password matches the username. If so it
-	// logs the user in and redirects to homepage
     @Listen("onClick = #reset")
     public void LoginUser(){
     	DBManager manager = new DBManager();

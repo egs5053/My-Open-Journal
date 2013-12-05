@@ -31,6 +31,9 @@
 		        	<button id="login" label="Log In" style = "color:black; font-size:14px; font-weight:bold"/>
 		        </row>
 		        <row>
+		        	<a href="reset.zul" class="bodyLink">Forgot your password?</a>
+		        </row>
+		        <row>
 		        	<hbox align = "center">
 		        		<label value="Not a member? Sign up here: " style = "font-size:14px" />
 		       			<button id="register" label="Register" style = "font-size:14px; font-weight:bold"/>

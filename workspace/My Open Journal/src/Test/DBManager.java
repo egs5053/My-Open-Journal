@@ -310,16 +310,22 @@ public class DBManager {
 	public boolean CheckResetCode(int id, int code)
 	{
 		String query;
+		String query2;
 		ResultSet rs;
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
 		query = "Select * from PWReset where User_ID= ? AND Reset_Code= ?;";
+		query2 = "DELETE from PWReset where User_ID= ? AND Reset_Code = ?;";
 		try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
 			stmt.setInt(1, id);
 			stmt.setInt(2, code);
 			rs = stmt.executeQuery();
-			if(!rs.next()) {
+			if(rs.next()) {
 				rs.close();
+				stmt = connection.GetConnection().prepareStatement(query2);
+				stmt.setInt(1, id);
+				stmt.setInt(2, code);
+				stmt.executeUpdate();
 				stmt.close();
 	    		connection.Disconnect();
 				return true;
@@ -338,7 +344,7 @@ public class DBManager {
 	}
 
 	public boolean UpdatePassword(int id, String pass){
-		String query;
+		String query1;
 		DBConnection connection;
 		
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");

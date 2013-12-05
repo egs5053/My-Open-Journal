@@ -94,9 +94,6 @@ public class Email {
 	         // Now set the actual message
 	         message.setText("The following is your password reset code:.\n\n" +
 	        		 resetString + "\n\n Please enter it in the field to reset your password.");
-	         
-	         message.setText("We hope you find My Open Journal to be useful.");
-	         message.setText("If you have any issues, please contact .");
 
 	         // Send message
 	         Transport.send(message);

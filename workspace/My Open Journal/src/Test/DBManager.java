@@ -7,10 +7,9 @@ import java.util.List;
 
 public class DBManager {
 
-	private DBConnection connection;
+	private static DBConnection connection;
 	
-	public List<PaperData> KeywordSearch(String keyword)
-	{
+	public List<PaperData> KeywordSearch(String keyword) {
 		int whitespacecount = 0;
 		for (int i = 0; i < keyword.length(); i++) {
 			if(Character.isWhitespace(keyword.charAt(i))){
@@ -79,44 +78,48 @@ public class DBManager {
 		}
 		else { return null;}
 	}
-
+	
 	public List<PaperData> AdvancedSearch(String title, boolean titleAnd,
-											int authorID, boolean authorIDAnd, 
-											String abstract, boolean abstractAnd, 
-											String category, boolean categoryAnd,
-											String tags)
-	{
+			int authorID, boolean authorIDAnd, 
+			String abstring, boolean abstractAnd, 
+			String category, boolean categoryAnd,
+			String tags) {
+		
 		String query = "select * from Papers where contains(title, ?) ? contains(Author_ID, ?) ? contains(Description, ?) ? contains(Category, ?) ? contains(Tags, ?);";
 		ResultSet rs;
+		
 		try{
 			connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+			
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
 			stmt.setString(1, "'\"" + title.replace(" ", "\" OR \"") + "\"'");
 			stmt.setString(2, (titleAnd)?"AND":"OR");
 			stmt.setInt(3, authorID);
-			stmt.setString(4, (authorAnd)?"AND":"OR");
+			stmt.setString(4, (authorIDAnd)?"AND":"OR");
 			stmt.setString(5, "'\"" + abstring.replace(" ", "\" OR \"") + "\"'");
 			stmt.setString(6, (abstractAnd)?"AND":"OR");
 			stmt.setString(7, category);
 			stmt.setString(8, (categoryAnd)?"AND":"OR");
 			stmt.setString(9, "'\"" + tags.replace(" ", "\" OR \"") + "\"'");
+			
 			rs = stmt.executeQuery();
+			
 			List<PaperData> rowValues = new ArrayList<PaperData>();
-			while (rs.next()) {
-				PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
-				rowValues.add(data);
-			}
-			rs.close();
-			stmt.close();
-			connection.Disconnect();
-			return rowValues;
+		
+		while (rs.next()) {
+			PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+			rowValues.add(data);
 		}
-		catch (SQLException e) {
-			System.out.println("Failure to search Papers: " + e.getMessage());
-			return null;
-		}
+		rs.close();
+		stmt.close();
+		connection.Disconnect();
+		return rowValues;
+	} catch (SQLException e) {
+		System.out.println("Failure to search Papers: " + e.getMessage());
+		return null;
 	}
-
+}
+	
 	public String GetPaperDate(int id)
 	{
 		String date;
@@ -250,56 +253,6 @@ public class DBManager {
 			stmt.close();
 	    	connection.Disconnect();
     		return id;
-		} 
-		catch (SQLException e) {
-	    	connection.Disconnect();
-			return -1;
-		}
-	}
-
-	public String GetEmail(String user)
-	{
-		String query;
-		ResultSet rs;
-		String email;
-
-		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "select Email from Users where Username= ?;";
-		try {
-			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setString(1, user);
-			rs = stmt.executeQuery();
-			rs.next();
-			email = rs.getString(1);
-	    	rs.close();
-			stmt.close();
-	    	connection.Disconnect();
-    		return email;
-		} 
-		catch (SQLException e) {
-	    	connection.Disconnect();
-			return "";
-		}
-	}
-
-	public String GetResetCode(int id)
-	{
-		String query;
-		ResultSet rs;
-		int code;
-
-		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "select Reset_Code from PWReset where User_ID= ?;";
-		try {
-			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setInt(1, id);
-			rs = stmt.executeQuery();
-			rs.next();
-			code = rs.getString(1);
-	    	rs.close();
-			stmt.close();
-	    	connection.Disconnect();
-    		return code;
 		} 
 		catch (SQLException e) {
 	    	connection.Disconnect();
@@ -580,6 +533,55 @@ public class DBManager {
 		return null;
 	}
 
+	public int GetResetCode(int id) {
+		String query;
+		ResultSet rs;
+		int code;
+
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Reset_Code from PWReset where User_ID= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			code = rs.getInt(1);
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+    		return code;
+		} 
+		catch (SQLException e) {
+	    	connection.Disconnect();
+			return -1;
+		}
+	}
+	
+	public String GetEmail(String user) {
+		String email;
+		String query;
+		ResultSet rs;
+
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "select Email from Users where Username= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setString(1, user);
+			rs = stmt.executeQuery();
+			rs.next();
+			email = rs.getString(1);
+	    	rs.close();
+			stmt.close();
+	    	connection.Disconnect();
+    		return email;
+		} 
+		catch (SQLException e) {
+	    	connection.Disconnect();
+			return "";
+		}
+	}
+	
+	
 	public List<Data> GetUserPapers(int id) {
 		String query;
 		ResultSet rs;

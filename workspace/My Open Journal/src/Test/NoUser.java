@@ -17,13 +17,4 @@ public class NoUser extends SelectorComposer<Component>{
     public void ReturnToHome() {
     	Executions.sendRedirect("index.zul");
     }
-
-    public void doAfterCompose(Grid comp) {
-        if (Executions.getCurrent().getParameter("username") != null) {
-            username.setValue("The user '" + Executions.getCurrent().getParameter("username") + "' does not exist");
-        } else {
-            username.setValue("No username provided");
-        }
-    }
-
 }

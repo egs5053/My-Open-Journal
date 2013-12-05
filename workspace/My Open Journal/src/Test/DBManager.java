@@ -306,6 +306,57 @@ public class DBManager {
 			return -1;
 		}
 	}
+
+	public boolean CheckResetCode(int id, int code)
+	{
+		String query;
+		ResultSet rs;
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+		query = "Select * from PWReset where User_ID= ? AND Reset_Code= ?;";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+			stmt.setInt(1, id);
+			stmt.setInt(2, code);
+			rs = stmt.executeQuery();
+			if(!rs.next()) {
+				rs.close();
+				stmt.close();
+	    		connection.Disconnect();
+				return true;
+			}
+			else {
+				rs.close();
+				stmt.close();
+	    		connection.Disconnect();
+				return false;
+			}
+		} 
+		catch (SQLException e) {
+	    	connection.Disconnect();
+			return false;
+		}
+	}
+
+	public boolean UpdatePassword(int id, String pass){
+		String query;
+		DBConnection connection;
+		
+		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    	query = "UPDATE Users SET Password = ? WHERE User_ID = ?";
+		try {
+			PreparedStatement stmt = connection.GetConnection().prepareStatement(query1);
+			stmt.setString(1, password);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+			stmt.close();
+	    	connection.Disconnect();
+	    	return true;
+		}
+		catch (SQLException e) {
+			System.out.println("Failure to update password: " + e.getMessage());
+			return false;
+		}
+	}
 	
 	public String GetUsername(int id)
 	{

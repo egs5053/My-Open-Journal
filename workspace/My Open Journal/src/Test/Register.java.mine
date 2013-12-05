@@ -39,19 +39,21 @@ public class Register extends SelectorComposer<Component> {
     	//	otherwise, prompt for a new username
     	boolean doesExist = manager.IsValidUser(username.getText());
     	
-    	EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+    	/*EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
 			public void onEvent(ClickEvent event)
 			{
 				Executions.sendRedirect("index.zul");
 			}
-		};
+		};*/
     	if (doesExist) {
     		// Prompt for different username
     		Messagebox.show(username.getText() + " already exists! Please choose different username", "", new Messagebox.Button[]{
-		        Messagebox.Button.OK}, Messagebox.INFORMATION, clickListener);
+		        Messagebox.Button.OK}, Messagebox.INFORMATION, null);
     	} else {	
 	    	// Insert User into database
 	    	manager.InsertUser(username.getText(), first.getText(), last.getText(), pass, email.getText(), "0", dateFormat.format(date)); 
+	    	// Send welcome email to the users email address
+	    	Email.SendWelcomeEmail(email.getText());    	
 	    	Executions.sendRedirect("index.zul");
 			
     	}

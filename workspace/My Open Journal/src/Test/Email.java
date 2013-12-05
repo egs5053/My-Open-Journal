@@ -87,13 +87,15 @@ public class Email {
 	                                  new InternetAddress(to));
 
 	         // Set Subject: header field
-	         message.setSubject("Welcome to My Open Journal!");
+	         message.setSubject("My Open Journal Password Reset");
 
 	         String resetString = String.valueOf(resetCode);
 	         
 	         // Now set the actual message
-	         message.setText("The following is your password reset code:.\n\n" +
-	        		 resetString + "\n\n Please enter it in the field to reset your password.");
+	         message.setText("The following is your password reset code:\n\n" +
+	        		 resetString + "\n\n Please enter it in the code field at " +
+	        		 		"the following link to reset your password: \n\n" +
+	        		 		"www.myopenjournal.org/newpassword.zul");
 
 	         // Send message
 	         Transport.send(message);

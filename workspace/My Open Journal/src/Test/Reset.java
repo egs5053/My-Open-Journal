@@ -37,7 +37,8 @@ public class Reset extends SelectorComposer<Component>{
     			int resetCode = manager.GetResetCode(manager.GetID(user));
     			//Add email sending code
     			Email.SendPasswordReset(manager.GetEmail(user), resetCode);
-    			Messagebox.show("Your password code has been sent to your email.");
+    			Messagebox.show("Your password code has been sent to your email.", "", new Messagebox.Button[] {
+	    				Messagebox.Button.OK}, Messagebox.INFORMATION,clickListener);
     		}
     		else{
     			Messagebox.show("Your password code has been sent to your email.");

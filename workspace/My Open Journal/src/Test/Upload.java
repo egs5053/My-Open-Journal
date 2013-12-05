@@ -34,6 +34,12 @@ public class Upload extends SelectorComposer<Component> {
 	@Wire 
 	Textbox author;
 	
+	@Wire
+	Textbox tags;
+	
+	@Wire
+	Textbox category;
+	
 	@Listen("onClick = #submitPaper")
 	public void InsertPaper()
 	{
@@ -47,7 +53,7 @@ public class Upload extends SelectorComposer<Component> {
     	id = manager.GetID(user);
     	path = "papers\\" + user + "\\" + filePath.getText();
     	
-    	manager.InsertPaper(id, title.getText(), path, description.getText(), dateFormat.format(date));
+    	manager.InsertPaper(id, title.getText(), path, description.getText(), dateFormat.format(date), tags.getText(), category.getText());
 		Executions.sendRedirect("index.zul");
 	}
 	

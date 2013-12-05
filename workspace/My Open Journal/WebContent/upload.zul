@@ -21,12 +21,12 @@
 				 	</hbox>
 				</row>
 				<row zclass="none">
-					<label value="Co-Authors" sclass="boxLabel"/>
+					<label value="Author" sclass="boxLabel"/>
 					<textbox id = "filePath" width = "300px"/>	
 				</row>
 				<row>
-					<textbox id = "coauthors" width="300px"/>
-					<label value = "Description" sclass="boxLabel"/>
+					<textbox id = "author" width="300px"/>
+					<label value = "Abstract" sclass="boxLabel"/>
 				</row>
 				<row zclass="none">
 					<label value="References" sclass="boxLabel"/>

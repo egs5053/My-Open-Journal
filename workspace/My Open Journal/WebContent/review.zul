@@ -1,9 +1,9 @@
-<?page title="MyOpenJournal - View Review" contentType="text/html;charset=UTF-8"?>
+﻿<?page title="MyOpenJournal - View Review" contentType="text/html;charset=UTF-8"?>
 <zk>
 <?init class="Test.SessionManager"?>
 
 	<window width = "722px">
-		<grid oddRowSclass="none" apply="Test.Review">
+		<grid oddRowSclass="none" apply="Test.Review" style="border: none; margin-left: 20px" sclass="tblWithoutHover">
 			<rows>
 				<row>
 					<cell colspan = "13">

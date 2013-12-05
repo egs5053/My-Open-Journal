@@ -12,6 +12,7 @@
 		<a href="contact.zul" sclass="navbar">Contact</a>
 		<label sclass="navbar" value="|" />
 		<a href="http://www.google.com/moderator/#16/e=209656" sclass="navbar">Bug Report</a>
+		<label sclass="navbar" value="|" />
 		<include src="searchbar.zul" />
 	</hlayout>
 	<hlayout sclass="navbar" style="float: right; width: auto;">

@@ -19,7 +19,7 @@
 					</hbox>
 		        </row>
 		        <row>
-		        	<button id="reset" label="Log In" style = "color:black; font-size:14px; font-weight:bold"/>
+		        	<button id="reset" label="Send Reset Code" style = "color:black; font-size:14px; font-weight:bold"/>
 		        </row>
 		        <row>
 		        	<hbox align = "center">

@@ -2,7 +2,7 @@
 <zk>
 <?init class="Test.SessionManager"?>
 
-<listbox id="Results" apply="Test.SearchResults" emptyMessage="No results found" style="margin-top:10px">
+<listbox id="Results" apply="Test.SearchResults" emptyMessage="No results found" style="margin-top:-20px">
         <listhead>
             <listheader label="Paper" />
             <listheader label="Author" />
@@ -15,5 +15,7 @@
                 <listcell label="${each.GetDescription()}"></listcell>
             </listitem>
         </template>
-    </listbox>
+</listbox>
+<div class="spacer">
+</div>
 </zk>

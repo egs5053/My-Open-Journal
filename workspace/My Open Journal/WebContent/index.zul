@@ -1,4 +1,4 @@
-<?page title="MyOpenJournal - Home" contentType="text/html;charset=UTF-12"?>
+﻿<?page title="MyOpenJournal - Home" contentType="text/html;charset=UTF-12"?>
 
 <zk>
 <?init class="Test.SessionManager"?>
@@ -8,7 +8,7 @@
 		<column>
 			<label value = "MOST POPULAR" style = "color: black; font-weight:bold; font-size:14px"/>
 			<grid id="popCol">
-  				<columns menupopup="auto">
+  				<columns menupopup="none">
     				<column width = "70%" label="Title" style = "color:black"/>
     				<column label="▲Up" align = "center" style = "color:green"/>
     				<column label="▼Down" align ="center" style = "color:red"/>
@@ -18,7 +18,7 @@
 		<column>
 		<label value = "NEWEST" style = "color: black; font-weight:bold; font-size:14px"/>
 			<grid id="newCol">
-  				<columns menupopup="auto">
+  				<columns menupopup="none">
     				<column width = "70%" label="Title" style = "color:black"/>
     				<column label="▲Up" align = "center" style = "color:green"/>
     				<column label="▼Down" align ="center" style = "color:red"/>
@@ -28,7 +28,7 @@
 		<column>
 			<label value = "HIGHEST RATED" style = "color:black; font-weight:bold; font-size:14px"/>
 			<grid id="highCol">
-  				<columns menupopup="auto">
+  				<columns menupopup="none">
     				<column width = "70%" label="Title" style = "color:black"/>
 					<column label= "Rating" align = "center"/>
   				</columns>

@@ -1,11 +1,9 @@
 <zk>
-	<window id="search_bar" title="Search" width="240px" border="normal" apply="Test.Search">
+	<window id="search_bar" style="margin-left: 2px; margin-top: -2px"  border="normal" apply="Test.Search" zclass="none">
     <hbox align="center">
         <textbox id="keywordBox" />
         <button id="searchButton" label="Search" />
+        <a href="advancedsearch.zul" sclass="navbar">Advanced Search</a>
     </hbox>
-    <hlayout sclass="search" style="text-align: left;">
-		<a href="advancedsearch.zul" sclass="navbar">Advanced Search</a>
-	</hlayout>
 	</window>
 </zk>

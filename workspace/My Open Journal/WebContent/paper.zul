@@ -2,7 +2,7 @@
 <zk>
 <?init class="Test.SessionManager"?>
 	<window width = "722px">
-		<grid oddRowSclass="none" apply="Test.Paper">
+		<grid oddRowSclass="none" apply="Test.Paper" style="border: none; margin-left: 20px" sclass="tblWithoutHover">
 			<rows>
 				<row>
 					<cell colspan = "12">
@@ -13,7 +13,7 @@
 				</row>
 				<row>
 					<cell colspan = "12">
-						<a href="#"><label id = "byAuthor" style = "font-weight:bold; font-size:14px"/></a>
+						<label id = "byAuthor" style = "font-weight:bold; font-size:14px" sclass="link"/>
 					</cell>
 				</row>
 				<row><label/></row>

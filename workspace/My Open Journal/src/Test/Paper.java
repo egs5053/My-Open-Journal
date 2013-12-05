@@ -181,12 +181,12 @@ public class Paper extends SelectorComposer<Grid> {
 
 	public void SetUpvotes() {
 		DBManager manager = new DBManager();
-		upVotes.setLabel("" + manager.GetPaperUpvotes(paperID) + "▲ up");
+		upVotes.setLabel("" + manager.GetPaperUpvotes(paperID) + " ▲ up");
 	}
 
 	public void SetDownvotes() {
 		DBManager manager = new DBManager();
-		dnVotes.setLabel(manager.GetPaperDownvotes(paperID) + "▼ dn");
+		dnVotes.setLabel(manager.GetPaperDownvotes(paperID) + " ▼ dn");
 	}
 
 	public void doAfterCompose(Grid comp) {

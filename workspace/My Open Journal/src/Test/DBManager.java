@@ -344,7 +344,7 @@ public class DBManager {
 	}
 
 	public boolean UpdatePassword(int id, String pass){
-		String query1;
+		String query;
 		DBConnection connection;
 		
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
@@ -436,12 +436,12 @@ public class DBManager {
 		}
 	}
 	
-	public boolean InsertPaper(int authorID, String title, String path, String description, String date)
+	public boolean InsertPaper(int authorID, String title, String path, String description, String date, String tags, String category)
 	{
 		String query;
 		
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "INSERT INTO Papers (Author_ID, Title, File_Path, Description, Upload_Date, Weight, Upvotes, Downvotes, Reports) VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0)";
+    	query = "INSERT INTO Papers (Author_ID, Title, File_Path, Description, Upload_Date, Weight, Upvotes, Downvotes, Reports, Tags, Category) VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0)";
 		try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
 			stmt.setInt(1, authorID);
@@ -449,6 +449,8 @@ public class DBManager {
 			stmt.setString(3, path);
 			stmt.setString(4, description);
 			stmt.setString(5, date);
+			stmt.setString(6, tags);
+			stmt.setString(7, category);
 			stmt.executeUpdate();
 			stmt.close();
 	    	connection.Disconnect();

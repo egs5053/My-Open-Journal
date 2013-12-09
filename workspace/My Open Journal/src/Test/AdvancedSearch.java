@@ -57,19 +57,46 @@ public class AdvancedSearch extends SelectorComposer<Component> {
 	@Listen("onClick = #search")
 	public void search() {
 		String titleText = title.getValue();
-        DBManager manager = new DBManager();
-        String authIDText = Integer.toString(manager.GetID(author.getValue()));
-        String absText = Abstract.getValue();
-        String catLabel = category.getSelectedItem().getLabel();
-        String tagsText = tags.getValue();
-        int whitespacecount = 0;
-        for (int i = 0; i < tagsText.length(); i++) {
-			if(Character.isWhitespace(tagsText.charAt(i))){
+        	DBManager manager = new DBManager();
+        	String authIDText = Integer.toString(manager.GetID(author.getValue()));
+        	String absText = Abstract.getValue();
+        	String catLabel = "";
+        	try {
+	      		catLabel = category.getSelectedItem().getLabel();
+	      }
+	       catch (Exception e) {
+	      	//catLabel stays the same
+	      }
+	      String tagsText = tags.getValue();
+	      int whitespacecount = 0;
+	      int whitespacecount2 = 0;
+	      int whitespacecount3 = 0;
+	      for (int i = 0; i < titleText.length(); i++) {
+			if(Character.isWhitespace(titleText.charAt(i))){
 				whitespacecount++;
 			}
 		}
         if (whitespacecount > 0) {
+        	titleText.replace(" ", "%20");
+        }
+        for (int i = 0; i < absText.length(); i++) {
+			if(Character.isWhitespace(absText.charAt(i))){
+				whitespacecount2++;
+			}
+		}
+        if (whitespacecount2 > 0) {
+        	absText.replace(" ", "%20");
+        }
+        for (int i = 0; i < tagsText.length(); i++) {
+			if(Character.isWhitespace(tagsText.charAt(i))){
+				whitespacecount3++;
+				System.out.println(whitespacecount3);
+			}
+		}
+        if (whitespacecount3 > 0) {
+        	System.out.println(tagsText);
         	tagsText.replace(" ", "%20");
+        	System.out.println(tagsText);
         }
         String titleBool;
         String authBool;
@@ -92,7 +119,23 @@ public class AdvancedSearch extends SelectorComposer<Component> {
         }
         else {catBool = "false";}
         
-        String redirect = "searchresults.zul?title=" + titleText + "&titleAnd=" + titleBool + "&authorID=" + authIDText + "&authorIDAnd=" + authBool + "&Abstract=" + absText + "&abstractAnd=" + absBool + "&category=" + catLabel + "&categoryAnd=" + catBool + "&tags=" + tagsText;
+        String redirect = "searchresults.zul?";
+        if (titleText != "") {
+        	redirect += "title=" + titleText + "&titleAnd=" + titleBool;
+        }
+        if (authIDText != "") {
+        	redirect += "&authorID=" + authIDText + "&authorIDAnd=" + authBool;
+        }
+        if (absText != "") {
+        	redirect += "&Abstract=" + absText + "&abstractAnd=" + absBool;
+        }
+        if (catLabel != "") {
+        	redirect += "&category=" + catLabel + "&categoryAnd=" + catBool;
+        }
+        if (tagsText != "") {
+        	redirect += "&tags=" + tagsText;
+        }
+        //+ titleText + "&titleAnd=" + titleBool + "&authorID=" + authIDText + "&authorIDAnd=" + authBool + "&Abstract=" + absText + "&abstractAnd=" + absBool + "&category=" + catLabel + "&categoryAnd=" + catBool + "&tags=" + tagsText;
         Executions.sendRedirect(redirect);
 	}
 }

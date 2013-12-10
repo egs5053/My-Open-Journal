@@ -3,8 +3,6 @@ package Test;
 import java.util.List;
 
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.*;
@@ -14,87 +12,68 @@ import java.util.Set;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Image;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.ext.Selectable;
 
 public class SearchResults extends SelectorComposer<Component> {
 	
 	@Wire
 	Listbox Results;
-	
-	/*public void DisplayResult(Grid myGrid, List<PaperData> data)
-	{
-	    Rows rows = new Rows();
-	    rows.setParent(myGrid);
-	    for(PaperData d : data)
-	    {
-	    	final int id = d.GetID();
-	        Label Title= new Label(d.GetTitle());
-	        Title.addEventListener("onClick", new EventListener<Event>()
-	        {
-	    		@Override
-	    		public void onEvent(Event event) throws Exception {
-	    			SessionManager.SetPaper(id);
-	    			Executions.sendRedirect("paper.zul");
-	    		}
-	    	}
-	    	);
-	        Label Author = new Label(d.GetAuthor());
-	        Label Description = new Label(d.GetDescription());
 
-	        Row row = new Row();
-
-	        Title.setParent(row);
-	        Author.setParent(row);
-	        Description.setParent(row);
-
-	        row.setParent(rows);
-	    }
-	}*/
-	
-	/*public void doAfterCompose(Grid comp) {
-		DBManager manager = new DBManager();
-		try {
-			super.doAfterCompose(comp);
-			String keyword = keywordBox.getValue();
-			List<PaperData> result = manager.KeywordSearch(keyword);
-	        DisplayResult(Results, result);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
-	/*@Listen("onClick = #searchButton")
-    public void search(){
-        String keyword = keywordBox.getValue();
-        DBManager manager = new DBManager();
-        List<PaperData> result = manager.KeywordSearch(keyword);
-        //DisplayResult(Results, result);
-        //ListModelList<PaperData> blah = new ListModelList<PaperData>(result);
-        //Results.setModel(blah);
-        Results.setModel(new ListModelList<PaperData>(result));
-	}*/
 	@Override
 	public void doAfterCompose(Component comp) {
 		DBManager manager = new DBManager();
 		try {
 			super.doAfterCompose(comp);
-			String keyword;
+			String keyword = "";
+			String title = "";
+			boolean titleAnd = false;
+			int authID = 0;
+			boolean authIDAnd = false;
+			String Abstract = "";
+			boolean absAnd = false;
+			String category = "";
+			boolean catAnd = false;
+			String tags = "";
+			
 			if (Executions.getCurrent().getParameter("keyword") != null) {
 	            String par = Executions.getCurrent().getParameter("keyword");
 	            keyword = par;
-	        } else {
-	            keyword = "";
+	            List<PaperData> result = manager.KeywordSearch(keyword);
+	            Results.setModel(new ListModelList<PaperData>(result));
 	        }
-			List<PaperData> result = manager.KeywordSearch(keyword);
-			Results.setModel(new ListModelList<PaperData>(result));
-			
+			else {
+				if (Executions.getCurrent().getParameter("title") != null) {
+					title = Executions.getCurrent().getParameter("title");
+					if (Executions.getCurrent().getParameter("titleAnd") == "true") {
+						titleAnd = true;
+					}
+				}
+					if (Executions.getCurrent().getParameter("authorID") != null) {
+						authID = Integer.parseInt(Executions.getCurrent().getParameter("authorID"));
+						if (Executions.getCurrent().getParameter("authorIDAnd") == "true") {
+							authIDAnd = true;
+						}
+					}
+					if (Executions.getCurrent().getParameter("Abstract") != null) {
+						Abstract = Executions.getCurrent().getParameter("Abstract");
+						if (Executions.getCurrent().getParameter("abstractAnd") == "true") {
+							absAnd = true;
+						}
+					}
+					if (Executions.getCurrent().getParameter("category") != null) {
+						category = Executions.getCurrent().getParameter("category");
+						if (Executions.getCurrent().getParameter("categoryAnd") == "true") {
+							catAnd = true;
+						}
+					}
+					if (Executions.getCurrent().getParameter("tags") != null) {
+						tags = Executions.getCurrent().getParameter("tags");
+					}
+					List<PaperData> result = manager.AdvancedSearch(title, titleAnd, authID, authIDAnd, Abstract, absAnd, category, catAnd, tags);
+		            Results.setModel(new ListModelList<PaperData>(result));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,10 +88,5 @@ public class SearchResults extends SelectorComposer<Component> {
 			SessionManager.SetPaper(id);
 			Executions.sendRedirect("paper.zul");
 		}
-		
 	}
-	
 }
-	
-	
-	

@@ -46,25 +46,25 @@ public class SearchResults extends SelectorComposer<Component> {
 			else {
 				if (Executions.getCurrent().getParameter("title") != null) {
 					title = Executions.getCurrent().getParameter("title");
-					if (Executions.getCurrent().getParameter("titleAnd") == "true") {
+					if (Executions.getCurrent().getParameter("titleAnd").equals("true")) {
 						titleAnd = true;
 					}
 				}
 					if (Executions.getCurrent().getParameter("authorID") != null) {
 						authID = Integer.parseInt(Executions.getCurrent().getParameter("authorID"));
-						if (Executions.getCurrent().getParameter("authorIDAnd") == "true") {
+						if (Executions.getCurrent().getParameter("authorIDAnd").equals("true")) {
 							authIDAnd = true;
 						}
 					}
 					if (Executions.getCurrent().getParameter("Abstract") != null) {
 						Abstract = Executions.getCurrent().getParameter("Abstract");
-						if (Executions.getCurrent().getParameter("abstractAnd") == "true") {
+						if (Executions.getCurrent().getParameter("abstractAnd").equals("true")) {
 							absAnd = true;
 						}
 					}
 					if (Executions.getCurrent().getParameter("category") != null) {
 						category = Executions.getCurrent().getParameter("category");
-						if (Executions.getCurrent().getParameter("categoryAnd") == "true") {
+						if (Executions.getCurrent().getParameter("categoryAnd").equals("true")) {
 							catAnd = true;
 						}
 					}

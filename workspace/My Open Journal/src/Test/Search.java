@@ -27,16 +27,9 @@ public class Search extends SelectorComposer<Component> {
 			Executions.sendRedirect("searchresults.zul?keyword=" + keyword);
 		}
 		else {
-			String[] keywords = keyword.split(" ");
-			String redirect = "searchresults.zul?keyword=";
-			for (String word : keywords) {
-				redirect += word + "%20";
-			}
-			Executions.sendRedirect(redirect);
+			keyword = keyword.replace(" ", "%20");
+			Executions.sendRedirect("searchresults.zul?keyword=" + keyword);
 		}
-        //DBManager manager = new DBManager();
-        //List<PaperData> result = manager.KeywordSearch(keyword);
-        
 	}
 	
 }

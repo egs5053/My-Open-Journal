@@ -38,7 +38,8 @@ public class DBManager {
 				rs = stmt.executeQuery();
 				List<PaperData> rowValues = new ArrayList<PaperData>();
 				while (rs.next()) {
-					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+					// rs.getString ints will need to be changed if database table "Papers" is changed
+					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(14), rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(7));
 					rowValues.add(data);
 				}
 				rs.close();
@@ -64,7 +65,8 @@ public class DBManager {
 				rs = stmt.executeQuery();
 				List<PaperData> rowValues = new ArrayList<PaperData>();
 				while (rs.next()) {
-					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
+					// rs.getString ints will need to be changed if database table "Papers" is changed
+					PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(14), rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(7));
 					rowValues.add(data);
 				}
 				rs.close();
@@ -79,43 +81,36 @@ public class DBManager {
 		}
 		else { return null;}
 	}
-
-	public List<PaperData> AdvancedSearch(String title, boolean titleAnd,
-											int authorID, boolean authorIDAnd, 
-											String myAbstract, boolean abstractAnd, 
-											String category, boolean categoryAnd,
-											String tags)
-	{
-		String query = "select * from Papers where contains(title, ?) ? contains(Author_ID, ?) ? contains(Description, ?) ? contains(Category, ?) ? contains(Tags, ?);";
-		ResultSet rs;
-		try{
-			connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
-			stmt.setString(1, "'\"" + title.replace(" ", "\" OR \"") + "\"'");
-			stmt.setString(2, (titleAnd)?"AND":"OR");
-			stmt.setInt(3, authorID);
-			stmt.setString(4, (authorIDAnd)?"AND":"OR");
-			stmt.setString(5, "'\"" + myAbstract.replace(" ", "\" OR \"") + "\"'");
-			stmt.setString(6, (abstractAnd)?"AND":"OR");
-			stmt.setString(7, category);
-			stmt.setString(8, (categoryAnd)?"AND":"OR");
-			stmt.setString(9, "'\"" + tags.replace(" ", "\" OR \"") + "\"'");
-			rs = stmt.executeQuery();
-			List<PaperData> rowValues = new ArrayList<PaperData>();
-			while (rs.next()) {
-				PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(6), rs.getString(9), rs.getString(10), rs.getInt(1), rs.getDouble(8));
-				rowValues.add(data);
-			}
-			rs.close();
-			stmt.close();
-			connection.Disconnect();
-			return rowValues;
-		}
-		catch (SQLException e) {
-			System.out.println("Failure to search Papers: " + e.getMessage());
-			return null;
-		}
-	}
+	
+    public List<PaperData> AdvancedSearch(String title, boolean titleAnd, int authorID, boolean authorIDAnd, String Abstract, boolean abstractAnd, String category, boolean categoryAnd, String tags)
+    {
+    	String query = "select * from Papers where contains(title, ?) " + ((titleAnd)?"AND":"OR") + " Author_ID = ? " + ((authorIDAnd)?"AND":"OR") + " contains(Description, ?) " + ((abstractAnd)?"AND":"OR") + " contains(Category, ?) " + ((categoryAnd)?"AND":"OR") + " contains(Tags, ?);";
+    	ResultSet rs;
+    	try{
+    		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
+    		PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
+    		stmt.setString(1, "\"" + title.replace(" ", "\" OR \"") + "\"");
+    		stmt.setInt(2, authorID);
+    		stmt.setString(3, "\"" + Abstract.replace(" ", "\" OR \"") + "\"");
+    		stmt.setString(4, "\"" + category + "\"");
+    		stmt.setString(5, "\"" + tags.replace(" ", "\" OR \"") + "\"");
+    		rs = stmt.executeQuery();
+    		List<PaperData> rowValues = new ArrayList<PaperData>();
+    		while (rs.next()) {
+    			// rs.getString ints will need to be changed if database table "Papers" is changed
+    			PaperData data = new PaperData(rs.getString(4), rs.getInt(2), rs.getString(14), rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(7));
+    			rowValues.add(data);
+    		}
+    		rs.close();
+    		stmt.close();
+    		connection.Disconnect();
+    		return rowValues;
+    	}
+    	catch (SQLException e) {
+    		System.out.println("Failure to search Papers: " + e.getMessage());
+    		return null;
+    	}
+    }
 
 	public String GetPaperDate(int id)
 	{
@@ -484,12 +479,12 @@ public class DBManager {
 		}
 	}
 	
-	public boolean InsertPaper(int authorID, String title, String path, String description, String date)
+	public boolean InsertPaper(int authorID, String title, String path, String description, String date, String tags, String category)
 	{
 		String query;
 		
 		connection = new DBConnection("10.2.65.20", "myopenjournal", "sa", "umaxistheman");
-    	query = "INSERT INTO Papers (Author_ID, Title, File_Path, Description, Upload_Date, Weight, Upvotes, Downvotes, Reports) VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0)";
+    	query = "INSERT INTO Papers (Author_ID, Title, File_Path, Description, Upload_Date, Weight, Upvotes, Downvotes, Reports, Tags, Category) VALUES (?, ?, ?, ?, ?, 0, 0, 0, 0, ?, ?)";
 		try {
 			PreparedStatement stmt = connection.GetConnection().prepareStatement(query);
 			stmt.setInt(1, authorID);
@@ -497,13 +492,15 @@ public class DBManager {
 			stmt.setString(3, path);
 			stmt.setString(4, description);
 			stmt.setString(5, date);
+			stmt.setString(6, tags);
+			stmt.setString(7, category);
 			stmt.executeUpdate();
 			stmt.close();
 	    	connection.Disconnect();
 	    	return true;
 		} 
 		catch (SQLException e) {
-			System.out.println("Failure to insert user: " + e.getMessage());
+			System.out.println("Failure to insert paper: " + e.getMessage());
 			return false;
 		}
 	}

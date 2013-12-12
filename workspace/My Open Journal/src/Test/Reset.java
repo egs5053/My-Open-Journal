@@ -15,6 +15,9 @@ public class Reset extends SelectorComposer<Component>{
 	// Textbox containing inputted username
 	@Wire 
 	Textbox username;
+
+	@Wire
+	Label message;
 	
 	// Checks to see if the password matches the username. If so it
 	// logs the user in and redirects to homepage
@@ -37,10 +40,12 @@ public class Reset extends SelectorComposer<Component>{
     			int resetCode = manager.GetResetCode(manager.GetID(user));
     			//Add email sending code
     			Email.SendPasswordReset(manager.GetEmail(user), resetCode);
-    			Messagebox.show("Your password code has been sent to your email.");
+    			message.setValue("Your password code has been sent to your email.");
+    			// Messagebox.show("Your password code has been sent to your email.");
     		}
     		else{
-    			Messagebox.show("Your password code has been sent to your email.");
+    			message.setValue("Your password code has been sent to your email.");
+    			// Messagebox.show("Your password code has been sent to your email.");
     		}
     		
     	}
